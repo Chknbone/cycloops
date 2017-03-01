@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <!-- Layout for a list of cyclones -->
+    <ListView
+        android:id="@+id/basic_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:divider="@null"
+        android:dividerHeight="0dp"/>
+
+    <!-- Empty view is only visible when the list has no items -->
+    <TextView
+        android:id="@+id/empty_earthquake_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textAppearance="?android:textAppearanceMedium">
+    </TextView>
+
+    <!-- No Network view only shows if no internet connection is available -->
+    <TextView
+        android:id="@+id/no_network"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textAppearance="?android:textAppearanceMedium"/>
+
+    <!-- Progress bar indicator for when earthquake data is being downloaded -->
+    <ProgressBar
+        android:id="@+id/loading_spinner"
+        style="@style/Widget.AppCompat.ProgressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>
