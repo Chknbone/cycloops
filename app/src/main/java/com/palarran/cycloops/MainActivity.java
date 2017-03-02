@@ -46,18 +46,19 @@ public class MainActivity extends AppCompatActivity
     private CycloneAdapter mAdapter;
 
     /** URL for Cyclone data from the USGS website data set */
-    private static final String USGS_REQUEST_URL = "http://earthquake.usgs.gov/fdsnws/event/1/query";
+    private static final String WUNDERGROUND_CURRENT_HURRICANE_URI = "http://api.wunderground.com/api/95e20de6002dc6f0/currenthurricane/view.format";
 
     /**
-     * Constant value for the Cyclone loader ID. We can choose any integer.
-     * This really only comes into play if you're using multiple loaders.
+     * Constant value for the Cyclone loader ID. Can be any integer.
+     *
+     * This really only comes into play if using multiple loaders.
      */
     private static final int CYCLONE_LOADER_ID = 1;
 
     /** TextView that is displayed when the Cyclone list is empty */
     private TextView mEmptyStateTextView;
 
-    /** TextView ths is displayed when there is no internet/network connection */
+    /** TextView ths is displayed when there is no available internet/network connection */
     private TextView mNoNetworkTextView;
 
     @Override
@@ -115,7 +116,7 @@ public class MainActivity extends AppCompatActivity
 
         // Create a new loader for the given URI
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String minMagnitude = sharedPrefs.getString(
+        String minCategory = sharedPrefs.getString(
                 getString(R.string.settings_min_category_key),
                 getString(R.string.settings_min_category_default));
 
@@ -123,12 +124,12 @@ public class MainActivity extends AppCompatActivity
                 getString(R.string.settings_order_by_key),
                 getString(R.string.settings_order_by_default));
 
-        Uri baseUri = Uri.parse(USGS_REQUEST_URL);
+        Uri baseUri = Uri.parse(WUNDERGROUND_CURRENT_HURRICANE_URI);
         Uri.Builder uriBuilder = baseUri.buildUpon();
 
-        uriBuilder.appendQueryParameter("format", "geojson");
+        uriBuilder.appendQueryParameter("format", "json");
         uriBuilder.appendQueryParameter("limit", "10");
-        uriBuilder.appendQueryParameter("minmag", minMagnitude);
+        uriBuilder.appendQueryParameter("minCat", minCategory);
         uriBuilder.appendQueryParameter("orderby", orderBy);
 
         return new CycloneLoader(this, uriBuilder.toString());

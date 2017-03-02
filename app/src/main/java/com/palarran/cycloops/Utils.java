@@ -49,27 +49,27 @@ public final class Utils {
             // Create a JSONObject from the JSON response string
             JSONObject jsonObjRoot = new JSONObject(cycloneJSON);
 
-            // Extract the JSONArray associated with the key called "features",
-            // which represents a list of features (or cyclones).
-            JSONArray featuresArray = jsonObjRoot.getJSONArray("features");
+            // Extract the JSONArray associated with the key called "currenthurricane",
+            // which represents a list of cyclones.
+            JSONArray currentHurricaneArray = jsonObjRoot.getJSONArray("currenthurricane");
 
-            //Loop through each feature in the featuresArray array & create an
+            //Loop through each feature in the currentHurricaneArray array & create an
             //{@link CycloneData} object for each one
-            for (int i = 0; i < featuresArray.length(); i++) {
+            for (int i = 0; i < currentHurricaneArray.length(); i++) {
                 //Get cyclone JSONObject at position i
-                JSONObject currentCyclone = featuresArray.getJSONObject(i);
+                JSONObject currentCyclone = currentHurricaneArray.getJSONObject(i);
                 //Get “properties” JSONObject
-                JSONObject properties = currentCyclone.getJSONObject("properties");
-                //Extract “mag” for magnitude
-                double magnitude = properties.getDouble("mag");
-                //Extract “place” for location
-                String location = properties.getString("place");
-                //Extract “time” for time
-                long time = properties.getLong("time");
+                JSONObject cycloneProperties = currentCyclone.getJSONObject("currenthurricane");
+                //Extract “Category” for cyclone category
+                double category = cycloneProperties.getDouble("Category");
+                //Extract “stormName” for Hurricane's name
+                String name = cycloneProperties.getString("stormName");
+                //Extract “epoch” for time
+                long time = cycloneProperties.getLong("epoch");
                 // Extract the value for the key called "url"
-                String url = properties.getString("url");
+                //String url = cycloneProperties.getString("url");
                 //Create CycloneData java object from magnitude, location, time, and url
-                CycloneData cyclone = new CycloneData(magnitude, location, time, url);
+                CycloneData cyclone = new CycloneData(category, name, time);
                 //Add new cyclone to list
                 cyclones.add(cyclone);
             }

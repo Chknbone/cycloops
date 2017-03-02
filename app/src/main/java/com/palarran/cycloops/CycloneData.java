@@ -28,12 +28,12 @@ public class CycloneData {
     * @param qTime is the date the earthquake happened
     * @param qUrl is the url of the USGS site that is providing the data
     * */
-    public CycloneData(double qMag, String qPlace, long qTime, String qUrl) {
+    public CycloneData(double qMag, String qPlace, long qTime) {
 
         mMagnitude = qMag;
         mPlace = qPlace;
         mTimeInMilliseconds = qTime;
-        mUrl = qUrl;
+        //mUrl = qUrl;
     }
 
     /**
