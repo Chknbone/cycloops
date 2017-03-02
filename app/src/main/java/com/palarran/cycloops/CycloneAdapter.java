@@ -112,7 +112,7 @@ public class CycloneAdapter extends ArrayAdapter<CycloneData> {
         categoryTextView.setText(output);
 
         //Get the initial location data and split it into two separate strings
-        String originalPlace = currentCycloneData.getmPlace();
+        String originalPlace = currentCycloneData.getmName();
 
         //Variables for the primary and offset TextViews that splitting the String will produce
         String primaryLocation;
