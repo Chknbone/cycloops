@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity
                 // Convert the String URL into a URI object (to pass into the Intent constructor)
                 Uri cycloneUri = Uri.parse(currentCyclone.getmUrl());
 
-                // Create a new intent to view the earthquake URI
+                // Create a new intent to view the Cyclone URI
                 Intent websiteIntent = new Intent(Intent.ACTION_VIEW, cycloneUri);
 
                 // Send the intent to launch a new activity
@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity
         if (isConnected == false) {
             mNoNetworkTextView.setText(R.string.no_network);
         } else {
-            // Set empty state text to display "No earthquakes found."
+            // Set empty state text to display "No cyclones found."
             mEmptyStateTextView.setText(R.string.no_cyclones_found);
         }
 
@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity
         ProgressBar progressBar = (ProgressBar) findViewById(R.id.loading_spinner);
         progressBar.setVisibility(View.GONE);
 
-        // Clear the adapter of previous earthquake data
+        // Clear the adapter of previous cyclone data
         mAdapter.clear();
 
         // If there is a valid list of {@link CycloneData}s, then add them to the adapter's

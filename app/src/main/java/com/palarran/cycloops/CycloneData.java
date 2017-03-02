@@ -2,39 +2,38 @@ package com.palarran.cycloops;
 
 /**
  * {@link CycloneData} represents a single Cyclone object.
- * Each object has 3 properties: Magnitude, Place, Time.
+ * Each object has 4 properties: Magnitude, Place, Time, and Url.
  */
 
 public class CycloneData {
 
-    // Magnitude of the Earthquake (e.g. 1.1, 4.3, 5.6...)
+    // Category of the cyclone (e.g. 1, 2, 3, 4, or 5)
     private double mCategory;
 
     // City name
     private String mName;
 
-    // Time and Date the earthquake happened
+    // Time and Date the cyclone happened
     private long mTimeInMilliseconds;
 
     // Url to website with Cyclone data
-    //Unused at this time.
-    //private String mUrl;
+    private String mUrl;
 
     /*
     * CONSTRUCTOR
     * Create a new CycloneData object.
     *
     * @param uCat is the category of the cyclone (e.g. 1, 2, 3, 4, or 5)
-    * @param uname is the name of the Cyclone
+    * @param uName is the name of the Cyclone
     * @param uTime is the date the Cyclone was reported
     * @param uUrl is the url of the website that is providing the data
     * */
-    public CycloneData(double uCat, String uName, long uTime) {
+    public CycloneData(double uCat, String uName, long uTime, String uUrl) {
 
         mCategory = uCat;
         mName = uName;
         mTimeInMilliseconds = uTime;
-        //mUrl = uUrl;
+        mUrl = uUrl;
     }
 
     /**
@@ -56,7 +55,7 @@ public class CycloneData {
     }
 
     // Get the Url
-//    public String getmUrl() {
-//        return mUrl;
-//    }
+    public String getmUrl() {
+        return mUrl;
+    }
 }

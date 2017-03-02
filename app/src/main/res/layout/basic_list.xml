@@ -29,7 +29,7 @@
         android:layout_centerInParent="true"
         android:textAppearance="?android:textAppearanceMedium"/>
 
-    <!-- Progress bar indicator for when earthquake data is being downloaded -->
+    <!-- Progress bar indicator for when cyclone data is being downloaded -->
     <ProgressBar
         android:id="@+id/loading_spinner"
         style="@style/Widget.AppCompat.ProgressBar"

@@ -6,7 +6,7 @@ import android.content.Context;
 import java.util.List;
 
 /**
- * Loads a list of earthquakes by using an AsyncTask to perform the network request
+ * Loads a list of cyclones by using an AsyncTask to perform the network request
  * to the given URL.
  */
 public class CycloneLoader extends AsyncTaskLoader<List<CycloneData>> {
@@ -43,8 +43,8 @@ public class CycloneLoader extends AsyncTaskLoader<List<CycloneData>> {
             return null;
     }
 
-        // Perform the network request, parse the response, and extract a list of earthquakes.
-        List<CycloneData> earthquakes = Utils.fetchCycloneData(mUrl);
-        return earthquakes;
+        // Perform the network request, parse the response, and extract a list of Cyclones.
+        List<CycloneData> cyclones = Utils.fetchCycloneData(mUrl);
+        return cyclones;
     }
 }

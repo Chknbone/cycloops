@@ -32,7 +32,7 @@ public class CycloneAdapter extends ArrayAdapter<CycloneData> {
      * The context is used to inflate the layout file, and the list is the data we want
      * to populate into the lists.
      *
-     * @param context        The current context. Used to inflate the layout file.
+     * @param context  The current context. Used to inflate the layout file.
      * @param cyclones A List of Cyclone Data objects to display in a list
      */
     public CycloneAdapter(Activity context, ArrayList<CycloneData> cyclones) {
@@ -55,7 +55,7 @@ public class CycloneAdapter extends ArrayAdapter<CycloneData> {
         return timeFormat.format(dateObject);
     }
 
-    //Helper method to get the correct color depending on the severity of the earthquake
+    //Helper method to get the correct color depending on the category of the cyclone
     private int getCategoryColor(double category) {
         int categoryColorResourceId;
         int categoryFloor = (int) Math.floor(category);
@@ -101,7 +101,7 @@ public class CycloneAdapter extends ArrayAdapter<CycloneData> {
         //Get the {@link CycloneData} object located at this position in the list
         CycloneData currentCycloneData = getItem(position);
 
-        //Find the TextView in the activity_main.xml layout with ID magnitude
+        //Find the TextView in the activity_main.xml layout with ID storm_category
         TextView categoryTextView = (TextView) listItemView.findViewById(R.id.storm_category);
 
         //Define how doubles are formatted (e.g. 2.3) Show only one decimal place
@@ -134,37 +134,37 @@ public class CycloneAdapter extends ArrayAdapter<CycloneData> {
         TextView locationOffsetTextView = (TextView) listItemView.findViewById(R.id.distance);
         locationOffsetTextView.setText(locationOffset);
 
-        // Create a new Date object from the time in milliseconds of the earthquake
+        // Create a new Date object from the time in milliseconds of the cyclone being reported
         Date dateObject = new Date(currentCycloneData.getmTimeInMilliseconds());
 
-        //Find the TextView of the from the earthquake_activity.xml layout w/ ID date
+        //Find the TextView of the from the activity_main.xml layout w/ ID date
         TextView dateTextView = (TextView) listItemView.findViewById(R.id.date);
 
-        // Format the date string (i.e. "Mar 3, 1984")
+        // Format the date string (i.e. "May 12, 1991")
         String formattedDate = formatDate(dateObject);
 
-        // Display the date of the current earthquake in that TextView
+        // Display the date of the current cyclone in that TextView
         dateTextView.setText(formattedDate);
         // Find the TextView with view ID time
         TextView timeView = (TextView) listItemView.findViewById(R.id.time);
 
-        // Format the time string (i.e. "4:30PM")
+        // Format the time string (i.e. "4:20PM")
         String formattedTime = formatTime(dateObject);
 
-        // Display the time of the current earthquake in that TextView
+        // Display the time of the current cyclone in that TextView
         timeView.setText(formattedTime);
 
-        // Set the proper background color on the magnitude circle.
+        // Set the proper background color on the cyclone shaped icon.
         // Fetch the background from the TextView, which is a GradientDrawable.
         GradientDrawable cycloneShape = (GradientDrawable) categoryTextView.getBackground();
 
-        // Get the appropriate background color based on the current earthquake magnitude
+        // Get the appropriate background color based on the current cyclone category
         int categoryColor = getCategoryColor(currentCycloneData.getCategory());
 
-        // Set the color on the magnitude circle
+        // Set the color on the cyclone shape icon
         cycloneShape.setColor(categoryColor);
 
-        //Return the whole list item layout (containing 4 TextViews) so that it can be shown in the Listview
+        //Return the whole list item layout (containing 3 TextViews) so that it can be shown in the Listview
         return listItemView;
     }
 }
