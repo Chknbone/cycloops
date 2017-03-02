@@ -49,15 +49,15 @@ public class MainActivity extends AppCompatActivity
     private static final String USGS_REQUEST_URL = "http://earthquake.usgs.gov/fdsnws/event/1/query";
 
     /**
-     * Constant value for the earthquake loader ID. We can choose any integer.
+     * Constant value for the Cyclone loader ID. We can choose any integer.
      * This really only comes into play if you're using multiple loaders.
      */
-    private static final int EARTHQUAKE_LOADER_ID = 1;
+    private static final int CYCLONE_LOADER_ID = 1;
 
-    /** TextView that is displayed when the earthquake list is empty */
+    /** TextView that is displayed when the Cyclone list is empty */
     private TextView mEmptyStateTextView;
 
-    /** TextView ths is displayed when there is no internet connection */
+    /** TextView ths is displayed when there is no internet/network connection */
     private TextView mNoNetworkTextView;
 
     @Override
@@ -65,28 +65,28 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.basic_list);
 
-        // Find a reference to the {@link ListView} in the earthquake_list layout
+        // Find a reference to the {@link ListView} in the basic_list layout
         ListView cycloneListView = (ListView) findViewById(R.id.basic_list);
 
-        // Create a new adapter that takes an empty list of earthquakes as input
+        // Create a new adapter that takes an empty list of Cyclones as input
         mAdapter = new CycloneAdapter(this, new ArrayList<CycloneData>());
 
         // Set the adapter on the {@link ListView} so the list can be populated in the UI
         cycloneListView.setAdapter(mAdapter);
 
         // Set an item click listener on the ListView, which sends an intent to a web browser
-        // to open a website with more information about the selected earthquake.
+        // to open a website with more information about the selected Cyclone.
         cycloneListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                // Find the current earthquake that was clicked on
-                CycloneData currentEarthquake = mAdapter.getItem(position);
+                // Find the current Cyclone that was clicked on
+                CycloneData currentCyclone = mAdapter.getItem(position);
 
                 // Convert the String URL into a URI object (to pass into the Intent constructor)
-                Uri earthquakeUri = Uri.parse(currentEarthquake.getmUrl());
+                Uri cycloneUri = Uri.parse(currentCyclone.getmUrl());
 
                 // Create a new intent to view the earthquake URI
-                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, earthquakeUri);
+                Intent websiteIntent = new Intent(Intent.ACTION_VIEW, cycloneUri);
 
                 // Send the intent to launch a new activity
                 startActivity(websiteIntent);
@@ -97,8 +97,8 @@ public class MainActivity extends AppCompatActivity
         mNoNetworkTextView = (TextView) findViewById(R.id.no_network);
         cycloneListView.setEmptyView(mNoNetworkTextView);
 
-        //Setting up the correct view in the event there is no earthquakes to list
-        mEmptyStateTextView = (TextView) findViewById(R.id.empty_earthquake_list);
+        //Setting up the correct view in the event there is no Cyclones to list
+        mEmptyStateTextView = (TextView) findViewById(R.id.empty_cyclone_list);
         cycloneListView.setEmptyView(mEmptyStateTextView);
 
         // Get a reference to the LoaderManager, in order to interact with loaders.
@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity
         // Initialize the loader. Pass in the int ID constant defined above and pass in null for
         // the bundle. Pass in this activity for the LoaderCallbacks parameter (which is valid
         // because this activity implements the LoaderCallbacks interface).
-        loaderManager.initLoader(EARTHQUAKE_LOADER_ID, null, this);
+        loaderManager.initLoader(CYCLONE_LOADER_ID, null, this);
 
     }
     @Override
@@ -116,8 +116,8 @@ public class MainActivity extends AppCompatActivity
         // Create a new loader for the given URI
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
         String minMagnitude = sharedPrefs.getString(
-                getString(R.string.settings_min_magnitude_key),
-                getString(R.string.settings_min_magnitude_default));
+                getString(R.string.settings_min_category_key),
+                getString(R.string.settings_min_category_default));
 
         String orderBy = sharedPrefs.getString(
                 getString(R.string.settings_order_by_key),
@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onLoadFinished(Loader<List<CycloneData>> loader, List<CycloneData> earthquakes) {
+    public void onLoadFinished(Loader<List<CycloneData>> loader, List<CycloneData> cyclones) {
 
         //No connectivity
         ConnectivityManager cm = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -157,10 +157,10 @@ public class MainActivity extends AppCompatActivity
         // Clear the adapter of previous earthquake data
         mAdapter.clear();
 
-        // If there is a valid list of {@link EarthquakeData}s, then add them to the adapter's
+        // If there is a valid list of {@link CycloneData}s, then add them to the adapter's
         // data set. This will trigger the ListView to update.
-        if (earthquakes != null && !earthquakes.isEmpty()) {
-            mAdapter.addAll(earthquakes);
+        if (cyclones != null && !cyclones.isEmpty()) {
+            mAdapter.addAll(cyclones);
         }
     }
 
@@ -170,7 +170,7 @@ public class MainActivity extends AppCompatActivity
         mAdapter.clear();
     }
 
-    //Menu for settings
+    //Menu for user preference settings
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);

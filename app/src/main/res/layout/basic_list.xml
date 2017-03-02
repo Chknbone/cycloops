@@ -14,7 +14,7 @@
 
     <!-- Empty view is only visible when the list has no items -->
     <TextView
-        android:id="@+id/empty_earthquake_list"
+        android:id="@+id/empty_cyclone_list"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"

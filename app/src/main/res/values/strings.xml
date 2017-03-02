@@ -1,13 +1,14 @@
 <!-- -->
 
 <resources>
+    <!-- Name of App -->
     <string name="app_name">Cycloops</string>
 
-    <!-- Text to display if there are no earthquakes -->
+    <!-- Text to display if there are no Cyclones -->
     <string name="no_cyclones_found">No cyclones found</string>
 
     <!-- Text to display if there is no network connection found -->
-    <string name="no_network">No Network Connection found</string>
+    <string name="no_network">No Network Connection...</string>
 
     <!-- Default text to show with the earthquake location ("Near the Pacific-Antarctic Ridge")
   if no specific kilometer distance from the primary location is given [CHAR LIMIT=30] -->
@@ -16,21 +17,21 @@
     <!-- Settings Menu Item [CHAR LIMIT=NONE] -->
     <string name="settings_menu_item">Settings</string>
     <!-- Settings Activity Title [CHAR LIMIT=NONE] -->
-    <string name="settings_title">Earthquake Settings</string>
+    <string name="settings_title">Cyclone Settings</string>
 
     <!-- Strings For Minimum Magnitude Preference [CHAR LIMIT=30] -->
-    <string name="settings_min_magnitude_label">Minimum Magnitude</string>
-    <string name="settings_min_magnitude_key" translatable="false">min_magnitude</string>
-    <string name="settings_min_magnitude_default" translatable="false">6</string>
+    <string name="settings_min_category_label">Minimum Category</string>
+    <string name="settings_min_category_key" translatable="false">min_category</string>
+    <string name="settings_min_category_default" translatable="false">1</string>
 
     <!-- Strings For Order-By Preference [CHAR LIMIT=30] -->
     <string name="settings_order_by_label">Order By</string>
     <string name="settings_order_by_key" translatable="false">order_by</string>
-    <string name="settings_order_by_default" translatable="false">@string/settings_order_by_magnitude_value</string>
+    <string name="settings_order_by_default" translatable="false">@string/settings_order_by_category_value</string>
 
     <!-- Label for order-by magnitude option [CHAR LIMIT=20] -->
-    <string name="settings_order_by_magnitude_label">Magnitude</string>
-    <string name="settings_order_by_magnitude_value" translatable="false">magnitude</string>
+    <string name="settings_order_by_category_label">Category</string>
+    <string name="settings_order_by_category_value" translatable="false">magnitude</string>
 
     <!-- Label for order-by most recent option [CHAR LIMIT=20] -->
     <string name="settings_order_by_most_recent_label">Most Recent</string>

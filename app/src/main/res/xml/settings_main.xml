@@ -11,10 +11,10 @@
         android:title="@string/settings_order_by_label" />
 
     <EditTextPreference
-        android:defaultValue="@string/settings_min_magnitude_default"
+        android:defaultValue="@string/settings_min_category_default"
         android:inputType="numberDecimal"
-        android:key="@string/settings_min_magnitude_key"
+        android:key="@string/settings_min_category_key"
         android:selectAllOnFocus="true"
-        android:title="@string/settings_min_magnitude_label" />
+        android:title="@string/settings_min_category_label" />
 
 </PreferenceScreen>

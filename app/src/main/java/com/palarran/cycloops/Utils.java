@@ -20,14 +20,14 @@ import java.util.List;
 import static com.palarran.cycloops.MainActivity.LOG_TAG;
 
 /**
- * Helper methods related to requesting and receiving earthquake data from USGS.
+ * Helper methods related to requesting and receiving Cyclone data from USGS.
  */
 public final class Utils {
 
     /**
      * Create a private constructor because no one should ever create a {@link Utils} object.
      * This class is only meant to hold static variables and methods, which can be accessed
-     * directly from the class name QueryUtils (and an object instance of QueryUtils is not needed).
+     * directly from the class name Utils (and an object instance of Utils is not needed).
      */
     private Utils() {
     }
@@ -36,30 +36,30 @@ public final class Utils {
      * Return a list of {@link CycloneData} objects that has been built up from
      * parsing a JSON response.
      */
-    public static ArrayList<CycloneData> extractFeatureFromJson(String earthquakeJSON) {
+    public static ArrayList<CycloneData> extractFeatureFromJson(String cycloneJSON) {
 
-        // Create an empty ArrayList that we can start adding earthquakes to
-        ArrayList<CycloneData> earthquakes = new ArrayList<>();
+        // Create an empty ArrayList that we can start adding Cyclones to
+        ArrayList<CycloneData> cyclones = new ArrayList<>();
 
-        // Try to parse the earthquakeJSON response string. If there's a problem with the way the JSON
+        // Try to parse the cycloneJSON response string. If there's a problem with the way the JSON
         // is formatted, a JSONException exception object will be thrown.
         // Catch the exception so the app doesn't crash, and print the error message to the logs.
         try {
 
             // Create a JSONObject from the JSON response string
-            JSONObject jsonObjRoot = new JSONObject(earthquakeJSON);
+            JSONObject jsonObjRoot = new JSONObject(cycloneJSON);
 
             // Extract the JSONArray associated with the key called "features",
-            // which represents a list of features (or earthquakes).
+            // which represents a list of features (or cyclones).
             JSONArray featuresArray = jsonObjRoot.getJSONArray("features");
 
             //Loop through each feature in the featuresArray array & create an
-            //{@link EarthquakeData} object for each one
+            //{@link CycloneData} object for each one
             for (int i = 0; i < featuresArray.length(); i++) {
-                //Get earthquake JSONObject at position i
-                JSONObject currentEarthquake = featuresArray.getJSONObject(i);
+                //Get cyclone JSONObject at position i
+                JSONObject currentCyclone = featuresArray.getJSONObject(i);
                 //Get “properties” JSONObject
-                JSONObject properties = currentEarthquake.getJSONObject("properties");
+                JSONObject properties = currentCyclone.getJSONObject("properties");
                 //Extract “mag” for magnitude
                 double magnitude = properties.getDouble("mag");
                 //Extract “place” for location
@@ -68,21 +68,21 @@ public final class Utils {
                 long time = properties.getLong("time");
                 // Extract the value for the key called "url"
                 String url = properties.getString("url");
-                //Create EarthquakeData java object from magnitude, location, time, and url
-                CycloneData earthquake = new CycloneData(magnitude, location, time, url);
-                //Add new earthquake to list
-                earthquakes.add(earthquake);
+                //Create CycloneData java object from magnitude, location, time, and url
+                CycloneData cyclone = new CycloneData(magnitude, location, time, url);
+                //Add new cyclone to list
+                cyclones.add(cyclone);
             }
 
         } catch (JSONException e) {
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.
-            Log.e("QueryUtils", "Problem parsing the earthquake JSON results", e);
+            Log.e("Utils", "Problem parsing the cyclone JSON results", e);
         }
 
-        // Return the list of earthquakes
-        return earthquakes;
+        // Return the list of cyclones
+        return cyclones;
     }
     /**
      * Returns new URL object from the given string URL.
@@ -159,7 +159,7 @@ public final class Utils {
     /**
      * Query the USGS data set and return a list of {@link CycloneData} objects.
      */
-    public static List<CycloneData> fetchEarthquakeData(String requestUrl) {
+    public static List<CycloneData> fetchCycloneData(String requestUrl) {
         // Create URL object
         URL url = createUrl(requestUrl);
 
@@ -171,10 +171,10 @@ public final class Utils {
             Log.e(LOG_TAG, "Problem making the HTTP request.", e);
         }
 
-        // Extract relevant fields from the JSON response and create a list of {@link Earthquake}s
-        List<CycloneData> earthquakes = extractFeatureFromJson(jsonResponse);
+        // Extract relevant fields from the JSON response and create a list of {@link CycloneData}s
+        List<CycloneData> cyclones = extractFeatureFromJson(jsonResponse);
 
-        // Return the list of {@link Earthquake}s
-        return earthquakes;
+        // Return the list of {@link CycloneData}s
+        return cyclones;
     }
 }

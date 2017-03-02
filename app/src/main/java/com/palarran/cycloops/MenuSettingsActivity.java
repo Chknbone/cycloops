@@ -16,7 +16,7 @@ public class MenuSettingsActivity extends AppCompatActivity {
         setContentView(R.layout.menu_settings_activity);
     }
 
-    public static class EarthquakePreferenceFragment extends PreferenceFragment
+    public static class CyclonePreferenceFragment extends PreferenceFragment
                         implements  Preference.OnPreferenceChangeListener {
 
         @Override
@@ -25,8 +25,8 @@ public class MenuSettingsActivity extends AppCompatActivity {
             addPreferencesFromResource(R.xml.settings_main);
 
             //Helper method  to update preference summary when settings activity is launched
-            Preference minMagnitude = findPreference(getString(R.string.settings_min_magnitude_key));
-            bindPreferenceSummaryToValue(minMagnitude);
+            Preference minCategory = findPreference(getString(R.string.settings_min_category_key));
+            bindPreferenceSummaryToValue(minCategory);
 
             Preference orderBy = findPreference(getString(R.string.settings_order_by_key));
             bindPreferenceSummaryToValue(orderBy);
@@ -50,7 +50,7 @@ public class MenuSettingsActivity extends AppCompatActivity {
         }
 
         //Define the bindPreferenceSummaryToValue() helper method to set the current
-        // EarthquakePreferenceFragment instance as the listener on each preference
+        //CyclonePreferenceFragment instance as the listener on each preference
         private void bindPreferenceSummaryToValue(Preference preference) {
             preference.setOnPreferenceChangeListener(this);
             SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(preference.getContext());

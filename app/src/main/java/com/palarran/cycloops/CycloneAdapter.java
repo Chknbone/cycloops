@@ -25,7 +25,6 @@ public class CycloneAdapter extends ArrayAdapter<CycloneData> {
     //If JSON place data contains the word "of", this will be used to help separate into two Strings.
     private static final String LOCATION_SEPARATOR = " of ";
 
-    //Unused
     private static final String LOG_TAG = CycloneAdapter.class.getSimpleName();
 
     /**
@@ -34,14 +33,14 @@ public class CycloneAdapter extends ArrayAdapter<CycloneData> {
      * to populate into the lists.
      *
      * @param context        The current context. Used to inflate the layout file.
-     * @param earthquakes A List of EarthquakeData objects to display in a list
+     * @param cyclones A List of Cyclone Data objects to display in a list
      */
-    public CycloneAdapter(Activity context, ArrayList<CycloneData> earthquakes) {
-        // Here, we initialize the ArrayAdapter's internal storage for the context and the list.
+    public CycloneAdapter(Activity context, ArrayList<CycloneData> cyclones) {
+        // Initialize the ArrayAdapter's internal storage for the context and the list.
         // The second argument is used when the ArrayAdapter is populating a single TextView.
         // Because this is a custom adapter for four TextViews, the adapter is not going to use
-        // this second argument, so it can be any value. Here, we used 0.
-        super(context, 0, earthquakes);
+        // this second argument, so it can be any value. Setting it at 0.
+        super(context, 0, cyclones);
     }
 
     //Helper method to return the formatted date string (i.e. "Mar 3, 1984") from a Date object.
@@ -50,17 +49,17 @@ public class CycloneAdapter extends ArrayAdapter<CycloneData> {
         return dateFormat.format(dateObject);
     }
 
-    //Helper Method to return the formatted date string (i.e. "4:30 PM") from a Date object.
+    //Helper Method to return the formatted date string (i.e. "4:20 PM") from a Date object.
     private String formatTime(Date dateObject) {
         SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
         return timeFormat.format(dateObject);
     }
 
     //Helper method to get the correct color depending on the severity of the earthquake
-    private int getCategoryColor(double magnitude) {
+    private int getCategoryColor(double category) {
         int categoryColorResourceId;
-        int magnitudeFloor = (int) Math.floor(magnitude);
-        switch (magnitudeFloor) {
+        int categoryFloor = (int) Math.floor(category);
+        switch (categoryFloor) {
             case 0:
             case 1:
                 categoryColorResourceId = R.color.catagory1;
@@ -99,21 +98,21 @@ public class CycloneAdapter extends ArrayAdapter<CycloneData> {
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.activity_main, parent, false);
         }
 
-        //Get the {@link EarthquakeData} object located at this position in the list
-        CycloneData currentEarthQuakeData = getItem(position);
+        //Get the {@link CycloneData} object located at this position in the list
+        CycloneData currentCycloneData = getItem(position);
 
-        //Find the TextView in the earthquake_activity.xml layout with ID magnitude
-        TextView magnitudeTextView = (TextView) listItemView.findViewById(R.id.storm_category);
+        //Find the TextView in the activity_main.xml layout with ID magnitude
+        TextView categoryTextView = (TextView) listItemView.findViewById(R.id.storm_category);
 
         //Define how doubles are formatted (e.g. 2.3) Show only one decimal place
-        DecimalFormat formattedMagnitude = new DecimalFormat("0.0");
-        String output = formattedMagnitude.format(currentEarthQuakeData.getmMagnitude());
+        DecimalFormat formattedCategory = new DecimalFormat("0.0");
+        String output = formattedCategory.format(currentCycloneData.getCategory());
 
-        // Get the magnitude from the formatted data & set that text on the magnitudeTextView
-        magnitudeTextView.setText(output);
+        // Get the category from the formatted data & set that text on the categoryTextView
+        categoryTextView.setText(output);
 
         //Get the initial location data and split it into two separate strings
-        String originalPlace = currentEarthQuakeData.getmPlace();
+        String originalPlace = currentCycloneData.getmPlace();
 
         //Variables for the primary and offset TextViews that splitting the String will produce
         String primaryLocation;
@@ -136,7 +135,7 @@ public class CycloneAdapter extends ArrayAdapter<CycloneData> {
         locationOffsetTextView.setText(locationOffset);
 
         // Create a new Date object from the time in milliseconds of the earthquake
-        Date dateObject = new Date(currentEarthQuakeData.getmTimeInMilliseconds());
+        Date dateObject = new Date(currentCycloneData.getmTimeInMilliseconds());
 
         //Find the TextView of the from the earthquake_activity.xml layout w/ ID date
         TextView dateTextView = (TextView) listItemView.findViewById(R.id.date);
@@ -157,15 +156,15 @@ public class CycloneAdapter extends ArrayAdapter<CycloneData> {
 
         // Set the proper background color on the magnitude circle.
         // Fetch the background from the TextView, which is a GradientDrawable.
-        GradientDrawable magnitudeCircle = (GradientDrawable) magnitudeTextView.getBackground();
+        GradientDrawable cycloneShape = (GradientDrawable) categoryTextView.getBackground();
 
         // Get the appropriate background color based on the current earthquake magnitude
-        int magnitudeColor = getCategoryColor(currentEarthQuakeData.getmMagnitude());
+        int categoryColor = getCategoryColor(currentCycloneData.getCategory());
 
         // Set the color on the magnitude circle
-        magnitudeCircle.setColor(magnitudeColor);
+        cycloneShape.setColor(categoryColor);
 
-        //Return the whole list item layout (containing 4 TextViews) so that it can be shown in the listview
+        //Return the whole list item layout (containing 4 TextViews) so that it can be shown in the Listview
         return listItemView;
     }
 }

@@ -40,7 +40,7 @@ public class CycloneData {
      * Setting public getters for the private variables above for use of other classes
      */
     // Get the Magnitude
-    public double getmMagnitude() {
+    public double getCategory() {
         return mMagnitude;
     }
 
