@@ -43,7 +43,7 @@ public class CycloneAdapter extends ArrayAdapter<CycloneData> {
         super(context, 0, cyclones);
     }
 
-    //Helper method to return the formatted date string (i.e. "Mar 3, 1984") from a Date object.
+    //Helper method to return the formatted date string (i.e. "May 12, 1991") from a Date object.
     private String formatDate(Date dateObject) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("LLL dd, yyyy");
         return dateFormat.format(dateObject);
@@ -58,6 +58,7 @@ public class CycloneAdapter extends ArrayAdapter<CycloneData> {
     //Helper method to get the correct color depending on the category of the cyclone
     private int getCategoryColor(double category) {
         int categoryColorResourceId;
+        //The Math.floor() function returns the largest integer less than or equal to a given number
         int categoryFloor = (int) Math.floor(category);
         switch (categoryFloor) {
             case 0:
@@ -89,6 +90,10 @@ public class CycloneAdapter extends ArrayAdapter<CycloneData> {
      * @return The View for the position in the AdapterView.
      */
 
+    /**
+     * TODO: Need to fix the views below. Time in particular does not need to be included. Should
+     * change this to some other bit of data from JSON response.
+     */
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

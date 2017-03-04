@@ -5,6 +5,7 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -44,32 +45,30 @@ public final class Utils {
         // Try to parse the cycloneJSON response string. If there's a problem with the way the JSON
         // is formatted, a JSONException exception object will be thrown.
         // Catch the exception so the app doesn't crash, and print the error message to the logs.
+
         try {
 
-            // Create a JSONObject from the JSON response string
-            JSONObject jsonObjRoot = new JSONObject(cycloneJSON);
+            JSONObject rootJsonObject = (JSONObject)new JSONTokener(cycloneJSON).nextValue();
 
-            // Extract the JSONArray associated with the key called "currenthurricane",
-            // which represents a list of cyclones.
-            JSONArray currentHurricaneArray = jsonObjRoot.getJSONArray("currenthurricane");
+            // Create and extract the JSONArray associated with the key called "currenthurricane",
+            // which represents a list of cyclones from JSON response.
+            JSONArray currentHurricaneArray = rootJsonObject.getJSONArray("currenthurricane");
 
-            //Loop through each feature in the currentHurricaneArray array & create an
+            //Loop through each section in the currentHurricaneArray array & create an
             //{@link CycloneData} object for each one
             for (int i = 0; i < currentHurricaneArray.length(); i++) {
-                //Get cyclone JSONObject at position i
-                JSONObject currentCyclone = currentHurricaneArray.getJSONObject(i);
-                //Get “properties” JSONObject
-                JSONObject cycloneProperties = currentCyclone.getJSONObject("currenthurricane");
+                //Get cyclone JSONObject at position i in the array
+                JSONObject cycloneProperties = currentHurricaneArray.getJSONObject(i);
+                //Extract “stormName” for Cyclone's name
+                String name = cycloneProperties.optString("stormName_Nice");
                 //Extract “Category” for cyclone category
-                double category = cycloneProperties.getDouble("Category");
-                //Extract “stormName” for Hurricane's name
-                String name = cycloneProperties.getString("stormName");
+                double category = cycloneProperties.optDouble("Category");
                 //Extract “epoch” for time
-                long time = cycloneProperties.getLong("epoch");
+                long time = cycloneProperties.optLong("epoch");
                 // Extract the value for the key called "url"
-                //String url = cycloneProperties.getString("url");
+                String url = cycloneProperties.optString("url");
                 //Create CycloneData java object from magnitude, location, time, and url
-                CycloneData cyclone = new CycloneData(category, name, time);
+                CycloneData cyclone = new CycloneData(category, name, time, url);
                 //Add new cyclone to list
                 cyclones.add(cyclone);
             }

@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity
     private CycloneAdapter mAdapter;
 
     /** URL for Cyclone data from the USGS website data set */
-    private static final String WUNDERGROUND_CURRENT_HURRICANE_URI = "http://api.wunderground.com/api/95e20de6002dc6f0/currenthurricane/view.format";
+    private static final String WUNDERGROUND_CURRENT_HURRICANE_URI = "http://api.wunderground.com/api/95e20de6002dc6f0/currenthurricane/view.json";
 
     /**
      * Constant value for the Cyclone loader ID. Can be any integer.

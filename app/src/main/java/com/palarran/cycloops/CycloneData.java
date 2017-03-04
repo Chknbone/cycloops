@@ -1,16 +1,16 @@
 package com.palarran.cycloops;
 
 /**
- * {@link CycloneData} represents a single Cyclone object.
- * Each object has 4 properties: Magnitude, Place, Time, and Url.
+ * {@link CycloneData} class represents a single Cyclone object.
+ * Each object has 4 properties: Category, Name, Time, and Url.
  */
 
 public class CycloneData {
 
-    // Category of the cyclone (e.g. 1, 2, 3, 4, or 5)
+    // Category of the cyclone (e.g. -2, -1, 0, 1, 2, 3, 4, or 5)
     private double mCategory;
 
-    // City name
+    // Cyclone name
     private String mName;
 
     // Time and Date the cyclone happened
@@ -23,7 +23,7 @@ public class CycloneData {
     * CONSTRUCTOR
     * Create a new CycloneData object.
     *
-    * @param uCat is the category of the cyclone (e.g. 1, 2, 3, 4, or 5)
+    * @param uCat is the category of the cyclone (e.g. -2, -1, 0, 1, 2, 3, 4, or 5)
     * @param uName is the name of the Cyclone
     * @param uTime is the date the Cyclone was reported
     * @param uUrl is the url of the website that is providing the data
