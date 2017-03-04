@@ -8,13 +8,13 @@ package com.palarran.cycloops;
 public class CycloneData {
 
     // Category of the cyclone (e.g. -2, -1, 0, 1, 2, 3, 4, or 5)
-    private double mCategory;
+    private int mCategory;
 
     // Cyclone name
     private String mName;
 
-    // Time and Date the cyclone happened
-    private long mTimeInMilliseconds;
+//    // Time and Date the cyclone happened
+//    private long mTimeInMilliseconds;
 
     // Url to website with Cyclone data
     private String mUrl;
@@ -23,16 +23,16 @@ public class CycloneData {
     * CONSTRUCTOR
     * Create a new CycloneData object.
     *
-    * @param uCat is the category of the cyclone (e.g. -2, -1, 0, 1, 2, 3, 4, or 5)
+    * @param uCategory is the category of the cyclone (e.g. -2, -1, 0, 1, 2, 3, 4, or 5)
     * @param uName is the name of the Cyclone
-    * @param uTime is the date the Cyclone was reported
+    *
     * @param uUrl is the url of the website that is providing the data
     * */
-    public CycloneData(double uCat, String uName, long uTime, String uUrl) {
+    public CycloneData(int uCategory, String uName, String uUrl) {
 
-        mCategory = uCat;
+        mCategory = uCategory;
         mName = uName;
-        mTimeInMilliseconds = uTime;
+//        mTimeInMilliseconds = uTime;
         mUrl = uUrl;
     }
 
@@ -40,7 +40,7 @@ public class CycloneData {
      * Setting public getters for the private variables above for use of other classes
      */
     // Get the storm category
-    public double getCategory() {
+    public int getCategory() {
         return mCategory;
     }
 
@@ -50,9 +50,9 @@ public class CycloneData {
     }
 
     // Get the time/date
-    public long getmTimeInMilliseconds() {
-        return mTimeInMilliseconds;
-    }
+//    public long getmTimeInMilliseconds() {
+//        return mTimeInMilliseconds;
+//    }
 
     // Get the Url
     public String getmUrl() {

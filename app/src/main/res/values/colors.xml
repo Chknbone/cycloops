@@ -12,22 +12,31 @@
     <!-- Text color for the details of the earthquake in the list item -->
     <color name="textColorCycloneDetails">#B4BAC0</color>
 
-    <!-- Text color for the primary location of the earthquake in the list item -->
+    <!-- Text color for the primary location of the cyclone in the list item -->
     <color name="textColorCycloneLocation">#2B3D4D</color>
 
+    <!-- Cyclone shape color for a category -2 cyclone -->
+    <color name="catagory_neg2">#03A9F4</color>
+
+    <!-- Cyclone shape color for a category -1 cyclone -->
+    <color name="catagory_neg1">#3F51B5</color>
+
+    <!-- Cyclone shape color for a category 0 cyclone -->
+    <color name="catagory0">#76FF03</color>
+
     <!-- Cyclone shape color for a category 1 cyclone -->
-    <color name="catagory1">#FFEB3B</color>
+    <color name="catagory1">#FFFF00</color>
 
     <!-- Cyclone shape color for a category 2 cyclone -->
     <color name="catagory2">#FF9800</color>
 
     <!-- Cyclone shape color for a category 3 cyclone -->
-    <color name="catagory3">#FF5722</color>
+    <color name="catagory3">#F44336</color>
 
     <!-- Cyclone shape color for a category 4 cyclone -->
-    <color name="catagory4">#F44336</color>
+    <color name="catagory4">#9C27B0</color>
 
     <!-- Cyclone shape color for a category 5 cyclone -->
-    <color name="catagory5">#9C27B0</color>
+    <color name="catagory5">#F48FB1</color>
 
 </resources>

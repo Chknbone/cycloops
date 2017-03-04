@@ -49,10 +49,12 @@ public final class Utils {
         try {
 
             JSONObject rootJsonObject = (JSONObject)new JSONTokener(cycloneJSON).nextValue();
+            JSONObject rootJsonObject2 = (JSONObject) new JSONTokener(cycloneJSON).nextValue();
 
             // Create and extract the JSONArray associated with the key called "currenthurricane",
             // which represents a list of cyclones from JSON response.
             JSONArray currentHurricaneArray = rootJsonObject.getJSONArray("currenthurricane");
+            JSONArray Current = rootJsonObject2.getJSONArray("Current");
 
             //Loop through each section in the currentHurricaneArray array & create an
             //{@link CycloneData} object for each one
@@ -61,14 +63,13 @@ public final class Utils {
                 JSONObject cycloneProperties = currentHurricaneArray.getJSONObject(i);
                 //Extract “stormName” for Cyclone's name
                 String name = cycloneProperties.optString("stormName_Nice");
-                //Extract “Category” for cyclone category
-                double category = cycloneProperties.optDouble("Category");
-                //Extract “epoch” for time
-                long time = cycloneProperties.optLong("epoch");
                 // Extract the value for the key called "url"
                 String url = cycloneProperties.optString("url");
-                //Create CycloneData java object from magnitude, location, time, and url
-                CycloneData cyclone = new CycloneData(category, name, time, url);
+                JSONObject categoryProperties = Current.getJSONObject(i);
+                //TODO: Need to figure out how to accept 0 and negative numbers as proper return values.
+                //Extract “Category” for cyclone category
+                int category = categoryProperties.getInt("SaffirSimpsonCategory");
+                CycloneData cyclone = new CycloneData(category, name, url);
                 //Add new cyclone to list
                 cyclones.add(cyclone);
             }

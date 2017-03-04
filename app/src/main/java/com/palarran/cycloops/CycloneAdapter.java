@@ -10,10 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
-import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * {@link CycloneAdapter} is an {@link ArrayAdapter} that provides the layout for each list
@@ -21,9 +18,6 @@ import java.util.Date;
  */
 
 public class CycloneAdapter extends ArrayAdapter<CycloneData> {
-
-    //If JSON place data contains the word "of", this will be used to help separate into two Strings.
-    private static final String LOCATION_SEPARATOR = " of ";
 
     private static final String LOG_TAG = CycloneAdapter.class.getSimpleName();
 
@@ -43,35 +37,32 @@ public class CycloneAdapter extends ArrayAdapter<CycloneData> {
         super(context, 0, cyclones);
     }
 
-    //Helper method to return the formatted date string (i.e. "May 12, 1991") from a Date object.
-    private String formatDate(Date dateObject) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("LLL dd, yyyy");
-        return dateFormat.format(dateObject);
-    }
-
-    //Helper Method to return the formatted date string (i.e. "4:20 PM") from a Date object.
-    private String formatTime(Date dateObject) {
-        SimpleDateFormat timeFormat = new SimpleDateFormat("h:mm a");
-        return timeFormat.format(dateObject);
-    }
-
     //Helper method to get the correct color depending on the category of the cyclone
-    private int getCategoryColor(double category) {
+    private int getCategoryColor(int category) {
         int categoryColorResourceId;
         //The Math.floor() function returns the largest integer less than or equal to a given number
         int categoryFloor = (int) Math.floor(category);
         switch (categoryFloor) {
             case 0:
             case 1:
-                categoryColorResourceId = R.color.catagory1;
+                categoryColorResourceId = R.color.catagory_neg2;
                 break;
             case 2:
-                categoryColorResourceId = R.color.catagory2;
+                categoryColorResourceId = R.color.catagory_neg1;
                 break;
             case 3:
-                categoryColorResourceId = R.color.catagory3;
+                categoryColorResourceId = R.color.catagory0;
                 break;
             case 4:
+                categoryColorResourceId = R.color.catagory1;
+                break;
+            case 5:
+                categoryColorResourceId = R.color.catagory2;
+                break;
+            case 6:
+                categoryColorResourceId = R.color.catagory3;
+                break;
+            case 7:
                 categoryColorResourceId = R.color.catagory4;
                 break;
             default:
@@ -90,10 +81,6 @@ public class CycloneAdapter extends ArrayAdapter<CycloneData> {
      * @return The View for the position in the AdapterView.
      */
 
-    /**
-     * TODO: Need to fix the views below. Time in particular does not need to be included. Should
-     * change this to some other bit of data from JSON response.
-     */
     @NonNull
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -109,55 +96,16 @@ public class CycloneAdapter extends ArrayAdapter<CycloneData> {
         //Find the TextView in the activity_main.xml layout with ID storm_category
         TextView categoryTextView = (TextView) listItemView.findViewById(R.id.storm_category);
 
-        //Define how doubles are formatted (e.g. 2.3) Show only one decimal place
-        DecimalFormat formattedCategory = new DecimalFormat("0.0");
-        String output = formattedCategory.format(currentCycloneData.getCategory());
+        // Get the category & set that text on the categoryTextView
+        int categoryOutput = currentCycloneData.getCategory();
+        categoryTextView.setText(categoryOutput);
 
-        // Get the category from the formatted data & set that text on the categoryTextView
-        categoryTextView.setText(output);
+        //Get the Cyclone name data
+        String cycloneName = currentCycloneData.getmName();
 
-        //Get the initial location data and split it into two separate strings
-        String originalPlace = currentCycloneData.getmName();
-
-        //Variables for the primary and offset TextViews that splitting the String will produce
-        String primaryLocation;
-        String locationOffset;
-
-        //Split the JSON String. One for City and one for Offset
-        if (originalPlace.contains(LOCATION_SEPARATOR)) {
-            String[] parts = originalPlace.split(LOCATION_SEPARATOR);
-            locationOffset = parts[0] + LOCATION_SEPARATOR;
-            primaryLocation = parts[1];
-        } else {
-            locationOffset = getContext().getString(R.string.near_the);
-            primaryLocation = originalPlace;
-        }
-
-        //Get the primary and offset locations from String split above & set text on the relevant Textviews
-        TextView primaryLocationTextView = (TextView) listItemView.findViewById(R.id.location);
-        primaryLocationTextView.setText(primaryLocation);
-        TextView locationOffsetTextView = (TextView) listItemView.findViewById(R.id.distance);
-        locationOffsetTextView.setText(locationOffset);
-
-        // Create a new Date object from the time in milliseconds of the cyclone being reported
-        Date dateObject = new Date(currentCycloneData.getmTimeInMilliseconds());
-
-        //Find the TextView of the from the activity_main.xml layout w/ ID date
-        TextView dateTextView = (TextView) listItemView.findViewById(R.id.date);
-
-        // Format the date string (i.e. "May 12, 1991")
-        String formattedDate = formatDate(dateObject);
-
-        // Display the date of the current cyclone in that TextView
-        dateTextView.setText(formattedDate);
-        // Find the TextView with view ID time
-        TextView timeView = (TextView) listItemView.findViewById(R.id.time);
-
-        // Format the time string (i.e. "4:20PM")
-        String formattedTime = formatTime(dateObject);
-
-        // Display the time of the current cyclone in that TextView
-        timeView.setText(formattedTime);
+        //Get the Cyclone name & set text on the relevant Textview
+        TextView cycloneNameTextView = (TextView) listItemView.findViewById(R.id.storm_name);
+        cycloneNameTextView.setText(cycloneName);
 
         // Set the proper background color on the cyclone shaped icon.
         // Fetch the background from the TextView, which is a GradientDrawable.
