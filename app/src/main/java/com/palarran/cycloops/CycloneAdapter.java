@@ -97,7 +97,9 @@ public class CycloneAdapter extends ArrayAdapter<CycloneData> {
 
         // Get the category & set that text on the categoryTextView
         int categoryOutput = currentCycloneData.getCategory();
-        categoryTextView.setText(categoryOutput);
+        //int need is converted to a String before setText can happen
+        categoryTextView.setText(Integer.toString(categoryOutput));
+
 
         //Get the Cyclone name data
         String cycloneName = currentCycloneData.getmName();
