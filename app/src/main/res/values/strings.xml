@@ -15,7 +15,7 @@
     <!-- Settings Activity Title [CHAR LIMIT=NONE] -->
     <string name="settings_title">Cyclone Settings</string>
 
-    <!-- Strings For Minimum Magnitude Preference [CHAR LIMIT=30] -->
+    <!-- Strings For Minimum Category Preference [CHAR LIMIT=30] -->
     <string name="settings_min_category_label">Minimum Category</string>
     <string name="settings_min_category_key" translatable="false">min_category</string>
     <string name="settings_min_category_default" translatable="false">1</string>
@@ -27,7 +27,7 @@
 
     <!-- Label for order-by magnitude option [CHAR LIMIT=20] -->
     <string name="settings_order_by_category_label">Category</string>
-    <string name="settings_order_by_category_value" translatable="false">magnitude</string>
+    <string name="settings_order_by_category_value" translatable="false">category</string>
 
     <!-- Label for order-by most recent option [CHAR LIMIT=20] -->
     <string name="settings_order_by_most_recent_label">Most Recent</string>

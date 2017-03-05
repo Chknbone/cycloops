@@ -18,12 +18,14 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.palarran.cycloops.MainActivity.LOG_TAG;
+import static android.R.attr.name;
 
 /**
  * Helper methods related to requesting and receiving Cyclone data from USGS.
  */
 public final class Utils {
+
+    private static final String LOG_TAG = Utils.class.getSimpleName();
 
     /**
      * Create a private constructor because no one should ever create a {@link Utils} object.
@@ -39,36 +41,38 @@ public final class Utils {
      */
     public static ArrayList<CycloneData> extractFeatureFromJson(String cycloneJSON) {
 
-        // Create an empty ArrayList that we can start adding Cyclones to
+        // Create an empty ArrayList to start adding Cyclones to
         ArrayList<CycloneData> cyclones = new ArrayList<>();
 
         // Try to parse the cycloneJSON response string. If there's a problem with the way the JSON
         // is formatted, a JSONException exception object will be thrown.
-        // Catch the exception so the app doesn't crash, and print the error message to the logs.
+        // Catch the exception , and print the error message to the logs.
 
         try {
 
-            JSONObject rootJsonObject = (JSONObject)new JSONTokener(cycloneJSON).nextValue();
-            JSONObject rootJsonObject2 = (JSONObject) new JSONTokener(cycloneJSON).nextValue();
+            JSONObject rootJsonObject = new JSONObject(cycloneJSON);
 
-            // Create and extract the JSONArray associated with the key called "currenthurricane",
-            // which represents a list of cyclones from JSON response.
+            // Create JSONArray associated with the key called "currenthurricane", which represents
+            // a list of cyclones from JSON response.
             JSONArray currentHurricaneArray = rootJsonObject.getJSONArray("currenthurricane");
-            JSONArray Current = rootJsonObject2.getJSONArray("Current");
 
             //Loop through each section in the currentHurricaneArray array & create an
             //{@link CycloneData} object for each one
             for (int i = 0; i < currentHurricaneArray.length(); i++) {
                 //Get cyclone JSONObject at position i in the array
                 JSONObject cycloneProperties = currentHurricaneArray.getJSONObject(i);
-                //Extract “stormName” for Cyclone's name
-                String name = cycloneProperties.optString("stormName_Nice");
-                // Extract the value for the key called "url"
-                String url = cycloneProperties.optString("url");
-                JSONObject categoryProperties = Current.getJSONObject(i);
-                //TODO: Need to figure out how to accept 0 and negative numbers as proper return values.
-                //Extract “Category” for cyclone category
-                int category = categoryProperties.getInt("SaffirSimpsonCategory");
+
+                // Extract "stormInfo" object
+                JSONObject stormInfo = cycloneProperties.optJSONObject("stormInfo");
+                //Extract “stormName_Nice” & "requesturl" for Cyclone's name and url
+                String name = stormInfo.optString("stormName_Nice");
+                String url = stormInfo.optString("requesturl");
+
+                // Extract "Current" object
+                JSONObject current = cycloneProperties.optJSONObject("Current");
+                // Extract "SaffirSimpsonCategory" key
+                int category = current.optInt("SaffirSimpsonCategory");
+
                 CycloneData cyclone = new CycloneData(category, name, url);
                 //Add new cyclone to list
                 cyclones.add(cyclone);
