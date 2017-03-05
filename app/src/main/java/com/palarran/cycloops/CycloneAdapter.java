@@ -43,25 +43,25 @@ public class CycloneAdapter extends ArrayAdapter<CycloneData> {
         //The Math.floor() function returns the largest integer less than or equal to a given number
         int categoryFloor = (int) Math.floor(category);
         switch (categoryFloor) {
-            case 0:
+            case -2:
                 categoryColorResourceId = R.color.catagory_neg2;
                 break;
-            case 1:
+            case -1:
                 categoryColorResourceId = R.color.catagory_neg1;
                 break;
-            case 2:
+            case 0:
                 categoryColorResourceId = R.color.catagory0;
                 break;
-            case 3:
+            case 1:
                 categoryColorResourceId = R.color.catagory1;
                 break;
-            case 4:
+            case 2:
                 categoryColorResourceId = R.color.catagory2;
                 break;
-            case 5:
+            case 3:
                 categoryColorResourceId = R.color.catagory3;
                 break;
-            case 6:
+            case 4:
                 categoryColorResourceId = R.color.catagory4;
                 break;
             default:

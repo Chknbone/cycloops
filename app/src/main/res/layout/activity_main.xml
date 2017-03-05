@@ -10,7 +10,7 @@
               android:paddingRight="16dp"
               android:paddingStart="16dp">
 
-    <!-- TODO: Need to work on getting an .svg or something to replace generic opal -->
+    <!-- TODO: Need to work on getting an .svg or something to replace generic oval -->
     <TextView
         android:id="@+id/storm_category"
         android:layout_width="36dp"
@@ -19,7 +19,7 @@
         android:background="@drawable/cyclone_shape_temp"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/darker_gray"
         android:textSize="16sp"
         tools:text="5"/>
 
