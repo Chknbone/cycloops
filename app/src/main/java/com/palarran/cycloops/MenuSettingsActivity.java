@@ -39,7 +39,7 @@ public class MenuSettingsActivity extends AppCompatActivity {
             if (preference instanceof ListPreference) {
                 ListPreference listPreference = (ListPreference) preference;
                 int prefIndex = listPreference.findIndexOfValue(stringValue);
-                if (prefIndex >= -2) {
+                if (prefIndex >= 0){
                     CharSequence[] labels = listPreference.getEntries();
                     preference.setSummary(labels[prefIndex]);
                 }

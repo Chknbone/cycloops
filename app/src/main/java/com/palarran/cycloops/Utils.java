@@ -66,7 +66,7 @@ public final class Utils {
                 JSONObject stormInfo = cycloneProperties.optJSONObject("stormInfo");
                 //Extract “stormName_Nice” & "requesturl" for Cyclone's name and url
                 String name = stormInfo.optString("stormName_Nice");
-                String url = stormInfo.optString("requesturl");
+                String url = stormInfo.optString("wuiurl");
 
                 // Extract "Current" object
                 JSONObject current = cycloneProperties.optJSONObject("Current");

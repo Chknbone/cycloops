@@ -12,20 +12,21 @@
 
     <!-- Settings Menu Item [CHAR LIMIT=NONE] -->
     <string name="settings_menu_item">Settings</string>
+
     <!-- Settings Activity Title [CHAR LIMIT=NONE] -->
     <string name="settings_title">Cyclone Settings</string>
 
     <!-- Strings For Minimum Category Preference [CHAR LIMIT=30] -->
     <string name="settings_min_category_label">Minimum Category</string>
     <string name="settings_min_category_key" translatable="false">min_category</string>
-    <string name="settings_min_category_default" translatable="false">1</string>
+    <string name="settings_min_category_default" translatable="false">-2</string>
 
     <!-- Strings For Order-By Preference [CHAR LIMIT=30] -->
     <string name="settings_order_by_label">Order By</string>
     <string name="settings_order_by_key" translatable="false">order_by</string>
     <string name="settings_order_by_default" translatable="false">@string/settings_order_by_category_value</string>
 
-    <!-- Label for order-by magnitude option [CHAR LIMIT=20] -->
+    <!-- Label for order-by category option [CHAR LIMIT=20] -->
     <string name="settings_order_by_category_label">Category</string>
     <string name="settings_order_by_category_value" translatable="false">category</string>
 
