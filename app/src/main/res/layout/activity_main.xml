@@ -19,7 +19,7 @@
         android:background="@drawable/cyclone_shape"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
-        android:textColor="@android:color/darker_gray"
+        android:textColor="@android:color/black"
         android:textSize="20sp"
         tools:text="5"/>
 
@@ -38,24 +38,22 @@
             android:id="@+id/storm_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
             android:ellipsize="end"
             android:fontFamily="sans-serif-medium"
             android:maxLines="1"
             android:textAllCaps="true"
-            android:textColor="@color/textColorCycloneDetails"
+            android:textColor="@color/textColorCycloneName"
             android:textSize="16sp"
             tools:text="Fred"/>
 
         <TextView
-            android:id="@+id/location"
+            android:id="@+id/direction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:maxLines="2"
-            android:textColor="@color/textColorCycloneLocation"
+            android:textColor="@color/textColorCycloneHeading"
             android:textSize="16sp"
-            tools:text="Long placeholder location that should wrap to more than 2 lines of text"/>
+            tools:text="Heading 270 degrees W"/>
     </LinearLayout>
 
     <LinearLayout
@@ -71,7 +69,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:textColor="@color/textColorCycloneDetails"
+            android:textColor="@color/textColorCycloneName"
             android:textSize="16sp"
             tools:text="75"/>
 
@@ -80,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:textColor="@color/textColorCycloneDetails"
+            android:textColor="@color/textColorCycloneName"
             android:textSize="12sp"
             tools:text="125 miles E"/>
     </LinearLayout>

@@ -10,10 +10,10 @@
     <color name="colorAccent">#76FF03</color>
 
     <!-- Text color for the details of the earthquake in the list item -->
-    <color name="textColorCycloneDetails">#B4BAC0</color>
+    <color name="textColorCycloneName">#0e0e0e</color>
 
     <!-- Text color for the primary location of the cyclone in the list item -->
-    <color name="textColorCycloneLocation">#2B3D4D</color>
+    <color name="textColorCycloneHeading">#2B3D4D</color>
 
     <!-- Cyclone shape color for a category -2 cyclone -->
     <color name="category_neg2">#03A9F4</color>

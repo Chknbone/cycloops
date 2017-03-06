@@ -76,7 +76,12 @@ public final class Utils {
                 int Kts = windSpeed.optInt("Kts");
                 String knots = Kts + " Knots";
 
-                CycloneData cyclone = new CycloneData(category, name, knots, url);
+                //Extract "Movement" object
+                JSONObject movement = current.optJSONObject("Movement");
+                //Extract movement direction in "Text" key
+                String direction = movement.optString("Text");
+
+                CycloneData cyclone = new CycloneData(category, name, direction, knots, url);
                 //Add new cyclone to list
                 cyclones.add(cyclone);
             }
