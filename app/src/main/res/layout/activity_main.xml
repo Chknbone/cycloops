@@ -13,14 +13,14 @@
     <!-- TODO: Need to work on getting an .svg or something to replace generic oval -->
     <TextView
         android:id="@+id/storm_category"
-        android:layout_width="36dp"
-        android:layout_height="36dp"
+        android:layout_width="46dp"
+        android:layout_height="46dp"
         android:layout_gravity="center_vertical"
-        android:background="@drawable/cyclone_shape_temp"
+        android:background="@drawable/cyclone_shape"
         android:fontFamily="sans-serif-medium"
         android:gravity="center"
         android:textColor="@android:color/darker_gray"
-        android:textSize="16sp"
+        android:textSize="20sp"
         tools:text="5"/>
 
     <LinearLayout
@@ -44,7 +44,7 @@
             android:maxLines="1"
             android:textAllCaps="true"
             android:textColor="@color/textColorCycloneDetails"
-            android:textSize="12sp"
+            android:textSize="16sp"
             tools:text="Fred"/>
 
         <TextView
@@ -67,13 +67,13 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/date"
+            android:id="@+id/wind_speed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:textColor="@color/textColorCycloneDetails"
-            android:textSize="12sp"
-            tools:text="Mar 5, 2015"/>
+            android:textSize="16sp"
+            tools:text="75"/>
 
         <TextView
             android:id="@+id/distance"

@@ -70,7 +70,13 @@ public final class Utils {
                 // Extract "SaffirSimpsonCategory" key
                 int category = current.optInt("SaffirSimpsonCategory");
 
-                CycloneData cyclone = new CycloneData(category, name, url);
+                //Extract "WindSpeed" object
+                JSONObject windSpeed = current.optJSONObject("WindSpeed");
+                //Extract wind speed in "Knots" Key
+                int Kts = windSpeed.optInt("Kts");
+                String knots = Kts + " Knots";
+
+                CycloneData cyclone = new CycloneData(category, name, knots, url);
                 //Add new cyclone to list
                 cyclones.add(cyclone);
             }

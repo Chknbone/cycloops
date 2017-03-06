@@ -44,28 +44,28 @@ public class CycloneAdapter extends ArrayAdapter<CycloneData> {
         int categoryFloor = (int) Math.floor(category);
         switch (categoryFloor) {
             case -2:
-                categoryColorResourceId = R.color.catagory_neg2;
+                categoryColorResourceId = R.color.category_neg2;
                 break;
             case -1:
-                categoryColorResourceId = R.color.catagory_neg1;
+                categoryColorResourceId = R.color.category_neg1;
                 break;
             case 0:
-                categoryColorResourceId = R.color.catagory0;
+                categoryColorResourceId = R.color.category0;
                 break;
             case 1:
-                categoryColorResourceId = R.color.catagory1;
+                categoryColorResourceId = R.color.category1;
                 break;
             case 2:
-                categoryColorResourceId = R.color.catagory2;
+                categoryColorResourceId = R.color.category2;
                 break;
             case 3:
-                categoryColorResourceId = R.color.catagory3;
+                categoryColorResourceId = R.color.category3;
                 break;
             case 4:
-                categoryColorResourceId = R.color.catagory4;
+                categoryColorResourceId = R.color.category4;
                 break;
             default:
-                categoryColorResourceId = R.color.catagory5;
+                categoryColorResourceId = R.color.category5;
                 break;
         }
         return ContextCompat.getColor(getContext(), categoryColorResourceId);
@@ -94,19 +94,22 @@ public class CycloneAdapter extends ArrayAdapter<CycloneData> {
 
         //Find the TextView in the activity_main.xml layout with ID storm_category
         TextView categoryTextView = (TextView) listItemView.findViewById(R.id.storm_category);
-
         // Get the category & set that text on the categoryTextView
         int categoryOutput = currentCycloneData.getCategory();
-        //int need is converted to a String before setText can happen
+        //int needs to be converted to a String before setText can happen properly
         categoryTextView.setText(Integer.toString(categoryOutput));
-
 
         //Get the Cyclone name data
         String cycloneName = currentCycloneData.getmName();
-
         //Get the Cyclone name & set text on the relevant Textview
         TextView cycloneNameTextView = (TextView) listItemView.findViewById(R.id.storm_name);
         cycloneNameTextView.setText(cycloneName);
+
+        //Find the TextView in the activity_main.xml layout with ID storm_category
+        TextView windSpeedTextView = (TextView) listItemView.findViewById(R.id.wind_speed);
+        //Get the wind speed the Cyclone is producing & set that text on the windSpeedTextView
+        String windSpeedKnots = currentCycloneData.getmWindSpeedKnots();
+        windSpeedTextView.setText(windSpeedKnots);
 
         // Set the proper background color on the cyclone shaped icon.
         // Fetch the background from the TextView, which is a GradientDrawable.

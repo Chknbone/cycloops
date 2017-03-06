@@ -13,6 +13,9 @@ public class CycloneData {
     // Cyclone name
     private String mName;
 
+    // Wind speed in Cyclone
+    private String mWindSpeedKnots;
+
 //    // Time and Date the cyclone happened
 //    private long mTimeInMilliseconds;
 
@@ -25,13 +28,14 @@ public class CycloneData {
     *
     * @param uCategory is the category of the cyclone (e.g. -2, -1, 0, 1, 2, 3, 4, or 5)
     * @param uName is the name of the Cyclone
-    *
+    * @param uWindSpeedKnots is the speed of the wind the Cyclone is producing
     * @param uUrl is the url of the website that is providing the data
     * */
-    public CycloneData(int uCategory, String uName, String uUrl) {
+    public CycloneData(int uCategory, String uName, String uWindSpeedKnots, String uUrl) {
 
         mCategory = uCategory;
         mName = uName;
+        mWindSpeedKnots = uWindSpeedKnots;
 //        mTimeInMilliseconds = uTime;
         mUrl = uUrl;
     }
@@ -47,6 +51,11 @@ public class CycloneData {
     // Get the cyclones name
     public String getmName() {
         return mName;
+    }
+
+    // Get the cyclones windspeed
+    public String getmWindSpeedKnots() {
+        return mWindSpeedKnots;
     }
 
     // Get the time/date
