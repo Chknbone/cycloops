@@ -38,7 +38,7 @@ public class CycloneAdapter extends ArrayAdapter<CycloneData> {
     }
 
     //Helper method to display the full text of the cardinal direction cyclone is moving. Data comes
-    //from the JSON response
+    //from the JSON response as just N, S, E, or W.
     private String getCardinalDirection(String compassHeading) {
         String direction;
         switch (compassHeading) {
@@ -126,9 +126,10 @@ public class CycloneAdapter extends ArrayAdapter<CycloneData> {
         TextView cycloneNameTextView = (TextView) listItemView.findViewById(R.id.storm_name);
         cycloneNameTextView.setText(cycloneName);
 
-        //Get the Cyclone Heading and direction data
-        String cHeading = currentCycloneData.getmHeading();
-        String cardinalDirection = getCardinalDirection(cHeading);
+        //Get the Cyclone Heading and direction data from JSON
+        String JSONHeading = currentCycloneData.getmHeading();
+        //Run it through the Switch statement above
+        String cardinalDirection = getCardinalDirection(JSONHeading);
         String cycloneHeading = cardinalDirection;
         //Get the Cyclone heading & set text on the relevant Textview
         TextView cycloneHeadingTextView = (TextView) listItemView.findViewById(R.id.direction);
@@ -150,7 +151,7 @@ public class CycloneAdapter extends ArrayAdapter<CycloneData> {
         // Set the color on the cyclone shape icon
         cycloneShape.setColor(categoryColor);
 
-        //Return the whole list item layout (containing 3 TextViews) so that it can be shown in the Listview
+        //Return the whole list item layout (containing 5 TextViews) so that it can be shown in the Listview
         return listItemView;
     }
 }

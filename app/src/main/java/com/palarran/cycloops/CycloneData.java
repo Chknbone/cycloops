@@ -2,7 +2,7 @@ package com.palarran.cycloops;
 
 /**
  * {@link CycloneData} class represents a single Cyclone object.
- * Each object has 4 properties: Category, Name, Time, and Url.
+ * Each object has 4 properties: Category, Name, Heading, WindSpeed, and Url.
  */
 
 public class CycloneData {
@@ -13,14 +13,11 @@ public class CycloneData {
     // Cyclone name
     private String mName;
 
-    // Cyclone heading
+    // Cyclone heading (N, S, E, or W)
     private String mHeading;
 
     // Wind speed in Cyclone
     private String mWindSpeedKnots;
-
-//    // Time and Date the cyclone happened
-//    private long mTimeInMilliseconds;
 
     // Url to website with Cyclone data
     private String mUrl;
@@ -41,7 +38,6 @@ public class CycloneData {
         mName = uName;
         mHeading = uHeading;
         mWindSpeedKnots = uWindSpeedKnots;
-//        mTimeInMilliseconds = uTime;
         mUrl = uUrl;
     }
 
@@ -67,11 +63,6 @@ public class CycloneData {
     public String getmWindSpeedKnots() {
         return mWindSpeedKnots;
     }
-
-    // Get the time/date
-//    public long getmTimeInMilliseconds() {
-//        return mTimeInMilliseconds;
-//    }
 
     // Get the Url
     public String getmUrl() {
