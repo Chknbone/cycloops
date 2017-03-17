@@ -27,6 +27,13 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.palarran.cycloops.MenuSettingsActivity"/>
         </activity>
+
+        <activity android:name=".CycloneMap">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.palarran.cycloops.CycloneMap"/>
+        </activity>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC9d4qOHlPW4MnrEde3ucDOVrPzyvN1qBs"/>

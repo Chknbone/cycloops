@@ -2,85 +2,107 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
-              android:layout_height="?android:attr/listPreferredItemHeight"
-              android:isScrollContainer="true"
-              android:orientation="horizontal"
-              android:paddingEnd="16dp"
-              android:paddingLeft="16dp"
-              android:paddingRight="16dp"
-              android:paddingStart="16dp">
-
-    <!-- TODO: Need to work on getting an .svg or something to replace generic oval -->
-    <TextView
-        android:id="@+id/storm_category"
-        android:layout_width="46dp"
-        android:layout_height="46dp"
-        android:layout_gravity="center_vertical"
-        android:background="@drawable/cyclone_shape"
-        android:fontFamily="sans-serif-medium"
-        android:gravity="center"
-        android:textColor="@android:color/black"
-        android:textSize="20sp"
-        tools:text="5"/>
+                android:layout_height="?android:attr/listPreferredItemHeight"
+                android:orientation="vertical"
+                android:paddingEnd="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingStart="16dp">
 
     <LinearLayout
-        android:id="@+id/clickable_info"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:background="?android:attr/selectableItemBackground">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:isScrollContainer="true"
+        android:layout_weight="1">
 
+        <!-- TODO: Need to work on getting an .svg or something to replace generic oval -->
         <TextView
-            android:id="@+id/storm_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
+            android:id="@+id/storm_category"
+            android:layout_width="46dp"
+            android:layout_height="46dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/cyclone_shape"
             android:fontFamily="sans-serif-medium"
-            android:maxLines="1"
-            android:textAllCaps="true"
-            android:textColor="@color/textColorCycloneName"
-            android:textSize="16sp"
-            tools:text="Fred"/>
+            android:gravity="center"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            tools:text="5"/>
 
-        <TextView
-            android:id="@+id/direction"
+        <LinearLayout
+            android:id="@+id/clickable_info"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/storm_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-medium"
+                android:maxLines="1"
+                android:textAllCaps="true"
+                android:textColor="@color/textColorCycloneName"
+                android:textSize="16sp"
+                tools:text="Fred"/>
+
+            <TextView
+                android:id="@+id/direction"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:textColor="@color/textColorCycloneHeading"
+                android:textSize="16sp"
+                tools:text="Heading 270 degrees W"/>
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:textColor="@color/textColorCycloneHeading"
-            android:textSize="16sp"
-            tools:text="Heading 270 degrees W"/>
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/wind_speed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:textColor="@color/textColorCycloneName"
+                android:textSize="16sp"
+                tools:text="75"/>
+
+            <TextView
+                android:id="@+id/distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:textColor="@color/textColorCycloneName"
+                android:textSize="12sp"
+                tools:text="125 miles E"/>
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:orientation="vertical">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="?android:attr/listPreferredItemHeight"
+        android:layout_marginTop="4dp"
+        android:layout_weight="1">
 
-        <TextView
-            android:id="@+id/wind_speed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:textColor="@color/textColorCycloneName"
-            android:textSize="16sp"
-            tools:text="75"/>
-
-        <TextView
-            android:id="@+id/distance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:textColor="@color/textColorCycloneName"
-            android:textSize="12sp"
-            tools:text="125 miles E"/>
+        <fragment
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            />
     </LinearLayout>
 
 </LinearLayout>

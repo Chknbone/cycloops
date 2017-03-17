@@ -37,10 +37,12 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.palarran.cycloops.CycloneMap.MapFragment;
+
 public class MainActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks<List<CycloneData>>{
 
-    public static final String LOG_TAG = MainActivity.class.getName();
+    public static final String LOG_TAG = CycloneMap.class.getName();
 
     /** Adapter for the list of Cyclones */
     private CycloneAdapter mAdapter;
@@ -110,6 +112,8 @@ public class MainActivity extends AppCompatActivity
         // because this activity implements the LoaderCallbacks interface).
         loaderManager.initLoader(CYCLONE_LOADER_ID, null, this);
 
+        CycloneMap showMap = new CycloneMap();
+        new MapFragment();
     }
     @Override
     public Loader<List<CycloneData>> onCreateLoader(int i, Bundle bundle) {
