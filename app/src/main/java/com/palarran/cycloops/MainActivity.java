@@ -37,39 +37,36 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.palarran.cycloops.CycloneMap.MapFragment;
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<CycloneData>> {
 
-public class MainActivity extends AppCompatActivity
-        implements LoaderManager.LoaderCallbacks<List<CycloneData>>{
+    public static final String LOG_TAG = MainActivity.class.getName();
 
-    public static final String LOG_TAG = CycloneMap.class.getName();
-
-    /** Adapter for the list of Cyclones */
+     //Adapter for the list of Cyclones
     private CycloneAdapter mAdapter;
 
-    /** URL for Cyclone data from the USGS website data set */
+
+     //URL for Cyclone data from the USGS website data set
     private static final String WUNDERGROUND_CURRENT_HURRICANE_URI = "http://api.wunderground.com/api/95e20de6002dc6f0/currenthurricane/view.json";
 
     /**
      * Constant value for the Cyclone loader ID. Can be any integer.
-     *
      * This really only comes into play if using multiple loaders.
      */
     private static final int CYCLONE_LOADER_ID = 1;
 
-    /** TextView that is displayed when the Cyclone list is empty */
+     //TextView that is displayed when the Cyclone list is empty
     private TextView mEmptyStateTextView;
 
-    /** TextView ths is displayed when there is no available internet/network connection */
+     //TextView ths is displayed when there is no available internet/network connection
     private TextView mNoNetworkTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.basic_list);
+        setContentView(R.layout.cyclone_list);
 
         // Find a reference to the {@link ListView} in the basic_list layout
-        ListView cycloneListView = (ListView) findViewById(R.id.basic_list);
+        ListView cycloneListView = (ListView) findViewById(R.id.cyclone_list);
 
         // Create a new adapter that takes an empty list of Cyclones as input
         mAdapter = new CycloneAdapter(this, new ArrayList<CycloneData>());
@@ -112,9 +109,9 @@ public class MainActivity extends AppCompatActivity
         // because this activity implements the LoaderCallbacks interface).
         loaderManager.initLoader(CYCLONE_LOADER_ID, null, this);
 
-        CycloneMap showMap = new CycloneMap();
-        new MapFragment();
+        startActivity(new Intent(this, CycloneMap.class));
     }
+
     @Override
     public Loader<List<CycloneData>> onCreateLoader(int i, Bundle bundle) {
 
@@ -143,12 +140,12 @@ public class MainActivity extends AppCompatActivity
     public void onLoadFinished(Loader<List<CycloneData>> loader, List<CycloneData> cyclones) {
 
         //No connectivity
-        ConnectivityManager cm = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager cm = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
         boolean isConnected = activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
-        if (isConnected == false) {
+        if (!isConnected) {
             mNoNetworkTextView.setText(R.string.no_network);
         } else {
             // Set empty state text to display "No cyclones found."

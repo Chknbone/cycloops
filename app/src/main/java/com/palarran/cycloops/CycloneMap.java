@@ -10,7 +10,11 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 
-public class CycloneMap extends AppCompatActivity {
+public class CycloneMap extends AppCompatActivity implements OnMapReadyCallback {
+
+    //Defining Google Map objects variables
+    GoogleMap mMap;
+    boolean mapReady=false;
 
     static final CameraPosition START_POINT = CameraPosition.builder()
             .target(new LatLng(38.1254, -101.1703))
@@ -19,43 +23,33 @@ public class CycloneMap extends AppCompatActivity {
             .tilt(5)
             .build();
 
-    public static class MapFragment extends com.google.android.gms.maps.MapFragment implements OnMapReadyCallback {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
-        //Defining Google Map objects variables
-        GoogleMap mMap;
-        boolean mapReady = false;
+        //Calling up the map fragment from activity_main.xml
+        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+    }
 
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
+    //Google map object that will change the map fragment in activity_main.xml
+    @Override
+    //onMapReady CallBack method
+    public void onMapReady(GoogleMap map) {
 
-            setContentView(R.layout.activity_main);
+        //Setting mapReady to true
+        mapReady=true;
 
-            //Calling up the map fragment from activity_main.xml
-            MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
-            mapFragment.getMapAsync(this);
-        }
+        //Loading local instance map from Callback
+        mMap = map;
 
-        //Google map object that will change the map fragment in activity_main.xml
-        @Override
-        //onMapReady CallBack method
-        public void onMapReady(GoogleMap map) {
+        //Set camera at starting point, high over the middle of the U.S of A.
+        initialCameraPosition(START_POINT);
+    }
 
-
-
-            //Setting mapReady to true
-            mapReady = true;
-
-            //Loading local instance map from Callback
-            mMap = map;
-
-            //Set camera at starting point, high over the middle of the U.S of A.
-            startupCamPosition(START_POINT);
-        }
-
-        private void startupCamPosition(CameraPosition target) {
-            //Setting position to the target created above
-            mMap.moveCamera(CameraUpdateFactory.newCameraPosition(target));
-        }
+    private void initialCameraPosition(CameraPosition target) {
+        //Setting position to the target created above
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(target));
     }
 }

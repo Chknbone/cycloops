@@ -5,7 +5,7 @@
 
     <!-- Layout for a list of cyclones -->
     <ListView
-        android:id="@+id/basic_list"
+        android:id="@+id/cyclone_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
