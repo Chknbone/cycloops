@@ -118,9 +118,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
+//        CycloneMap mapFrag = new CycloneMap();
+//        fragmentTransaction.add(R.id.google_map, mapFrag);
+//        fragmentTransaction.replace(R.id.google_map, mapFrag);
+//        fragmentTransaction.commit();
+
         CycloneMap mapFrag = new CycloneMap();
-        fragmentTransaction.add(R.id.google_map, mapFrag);
-        fragmentTransaction.replace(R.id.google_map, mapFrag);
+        fragmentTransaction.add(R.id.fragment_layout, mapFrag);
+        fragmentTransaction.replace(R.id.fragment_layout, mapFrag);
         fragmentTransaction.commit();
     }
 

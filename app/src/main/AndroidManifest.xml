@@ -29,8 +29,6 @@
                 android:value="com.palarran.cycloops.MenuSettingsActivity"/>
         </activity>
 
-        <activity android:name=".CycloneMap"/>
-
         <uses-feature
             android:glEsVersion="0x00020000"
             android:required="true" />
