@@ -26,28 +26,19 @@ public class CycloneMap extends Fragment implements OnMapReadyCallback {
             .build();
 
     @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.cyclone_list, container, false);
     }
 
-    // This event is triggered soon after onCreateView().
-    // onViewCreated() is only called if the view returned from onCreateView() is non-null.
-    // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        
-    }
-    // This method is called after the parent Activity's onCreate() method has completed.
-    // Accessing the view hierarchy of the parent activity must be done in the onActivityCreated.
-    // At this point, it is safe to search for activity View objects by their ID, for example.
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
-
-    @Override
+    //TODO: onMapReady Callback is not being called
+    // FIXME: 3/20/2017
     //onMapReady CallBack method
     public void onMapReady(GoogleMap map) {
 
@@ -56,6 +47,9 @@ public class CycloneMap extends Fragment implements OnMapReadyCallback {
 
         //Loading local instance map from Callback
         mMap = map;
+
+        //Set map type to Satellite view
+        map.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 
         //Set camera at starting point, high over the middle of the U.S of A.
         initialCameraPosition(START_POINT);

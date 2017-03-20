@@ -76,18 +76,4 @@
                 android:textSize="12sp"
                 tools:text="125 miles E"/>
         </LinearLayout>
-
-    <!--<FrameLayout-->
-        <!--android:layout_width="fill_parent"-->
-        <!--android:layout_height="fill_parent"-->
-        <!--android:layout_below="@id/list_layout"-->
-        <!--android:id="@+id/fragment_layout">-->
-
-        <!--<fragment-->
-            <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
-            <!--android:id="@+id/google_map"-->
-            <!--android:name="com.palarran.cycloops.CycloneMap"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="fill_parent"/>-->
-    <!--</FrameLayout>-->
 </LinearLayout>
