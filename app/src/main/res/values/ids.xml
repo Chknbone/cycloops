@@ -2,4 +2,5 @@
 <resources>
     <item name="fragment_layout" type="id">fragment_layout</item>
     <item name="google_map" type="id">google_map</item>
+    <item name="list_layout2" type="id">list_layout2</item>
 </resources>

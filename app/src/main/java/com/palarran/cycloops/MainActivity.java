@@ -46,9 +46,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
      //Adapter for the list of Cyclones
     private CycloneAdapter mAdapter;
 
-
      //URL for Cyclone data from the USGS website data set
-    private static final String WUNDERGROUND_CURRENT_HURRICANE_URI = "http://api.wunderground.com/api/95e20de6002dc6f0/currenthurricane/view.json";
+    private static final String WUNDERGROUND_CURRENT_HURRICANE_URI
+             = "http://api.wunderground.com/api/95e20de6002dc6f0/currenthurricane/view.json";
 
     /**
      * Constant value for the Cyclone loader ID. Can be any integer.
@@ -111,21 +111,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // because this activity implements the LoaderCallbacks interface).
         loaderManager.initLoader(CYCLONE_LOADER_ID, null, this);
 
-//        CycloneMap fragment = (CycloneMap) getFragmentManager().findFragmentById(R.id.google_map);
-//        fragment.getMapAsync((OnMapReadyCallback) this);
-
-//        startActivity(new Intent(this, CycloneMap.class));
         FragmentManager fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-//        CycloneMap mapFrag = new CycloneMap();
-//        fragmentTransaction.add(R.id.google_map, mapFrag);
-//        fragmentTransaction.replace(R.id.google_map, mapFrag);
-//        fragmentTransaction.commit();
-
         CycloneMap mapFrag = new CycloneMap();
-        fragmentTransaction.add(R.id.fragment_layout, mapFrag);
-        fragmentTransaction.replace(R.id.fragment_layout, mapFrag);
+        fragmentTransaction.add(R.id.google_map, mapFrag);
         fragmentTransaction.commit();
     }
 

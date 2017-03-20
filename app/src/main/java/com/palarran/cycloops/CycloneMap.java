@@ -16,7 +16,7 @@ public class CycloneMap extends Fragment implements OnMapReadyCallback {
 
     //Defining Google Map objects variables
     GoogleMap mMap;
-    boolean mapReady=false;
+    boolean mapReady = false;
 
     static final CameraPosition START_POINT = CameraPosition.builder()
             .target(new LatLng(38.1254, -101.1703))
@@ -26,28 +26,33 @@ public class CycloneMap extends Fragment implements OnMapReadyCallback {
             .build();
 
     @Override
-//    public void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.fragment_layout);
-//
-//        //Calling up the map fragment from activity_main.xml
-//        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.google_map);
-//        mapFragment.getMapAsync(this);
-//    }
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.activity_main, container, false);
+        return inflater.inflate(R.layout.cyclone_list, container, false);
     }
 
-    //Google map object that will change the map fragment in activity_main.xml
+    // This event is triggered soon after onCreateView().
+    // onViewCreated() is only called if the view returned from onCreateView() is non-null.
+    // Any view setup should occur here.  E.g., view lookups and attaching view listeners.
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        
+    }
+    // This method is called after the parent Activity's onCreate() method has completed.
+    // Accessing the view hierarchy of the parent activity must be done in the onActivityCreated.
+    // At this point, it is safe to search for activity View objects by their ID, for example.
+    @Override
+    public void onActivityCreated(Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+    }
+
     @Override
     //onMapReady CallBack method
     public void onMapReady(GoogleMap map) {
 
         //Setting mapReady to true
-        mapReady=true;
+        mapReady = true;
 
         //Loading local instance map from Callback
         mMap = map;
