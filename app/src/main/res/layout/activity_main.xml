@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
                 android:layout_height="?android:attr/listPreferredItemHeight"
                 android:orientation="vertical"
-                android:isScrollContainer="true"
-                android:paddingEnd="16dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingStart="16dp"
                 tools:context="com.palarran.cycloops.MainActivity">
 
     <LinearLayout
         android:id="@+id/list_layout"
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:isScrollContainer="true"
-        android:layout_weight="1">
+        >
 
         <!-- TODO: Need to work on getting an .svg or something to replace generic oval -->
         <TextView
@@ -90,16 +85,21 @@
                 android:textSize="12sp"
                 tools:text="125 miles E"/>
         </LinearLayout>
+
     </LinearLayout>
 
-
+    <FrameLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@id/list_layout"
+        android:id="@+id/fragment_layout">
 
         <fragment
             xmlns:android="http://schemas.android.com/apk/res/android"
-            android:id="@+id/map"
-            android:name="com.google.android.gms.maps.MapFragment"
+            android:id="@+id/google_map"
+            android:name="com.palarran.cycloops.CycloneMap"
+            class="com.palarran.cycloops.CycloneMap"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:layout_below="@+id/list_layout"/>
-
+            android:layout_height="fill_parent"/>
+    </FrameLayout>
 </RelativeLayout>

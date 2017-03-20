@@ -15,14 +15,17 @@
  */
 package com.palarran.cycloops;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
+import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.Loader;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.LoaderManager;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -30,7 +33,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.content.Loader;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -109,7 +111,17 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // because this activity implements the LoaderCallbacks interface).
         loaderManager.initLoader(CYCLONE_LOADER_ID, null, this);
 
-        startActivity(new Intent(this, CycloneMap.class));
+//        CycloneMap fragment = (CycloneMap) getFragmentManager().findFragmentById(R.id.google_map);
+//        fragment.getMapAsync((OnMapReadyCallback) this);
+
+//        startActivity(new Intent(this, CycloneMap.class));
+        FragmentManager fragmentManager = getFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+
+        CycloneMap mapFrag = new CycloneMap();
+        fragmentTransaction.add(R.id.google_map, mapFrag);
+        fragmentTransaction.replace(R.id.google_map, mapFrag);
+        fragmentTransaction.commit();
     }
 
     @Override

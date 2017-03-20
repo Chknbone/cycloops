@@ -31,6 +31,10 @@
 
         <activity android:name=".CycloneMap"/>
 
+        <uses-feature
+            android:glEsVersion="0x00020000"
+            android:required="true" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyC9d4qOHlPW4MnrEde3ucDOVrPzyvN1qBs"/>

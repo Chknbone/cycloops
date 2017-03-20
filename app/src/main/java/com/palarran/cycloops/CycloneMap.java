@@ -1,16 +1,18 @@
 package com.palarran.cycloops;
 
+import android.app.Fragment;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 
-public class CycloneMap extends AppCompatActivity implements OnMapReadyCallback {
+public class CycloneMap extends Fragment implements OnMapReadyCallback {
 
     //Defining Google Map objects variables
     GoogleMap mMap;
@@ -24,13 +26,19 @@ public class CycloneMap extends AppCompatActivity implements OnMapReadyCallback 
             .build();
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+//    public void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.fragment_layout);
+//
+//        //Calling up the map fragment from activity_main.xml
+//        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.google_map);
+//        mapFragment.getMapAsync(this);
+//    }
 
-        //Calling up the map fragment from activity_main.xml
-        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.activity_main, container, false);
     }
 
     //Google map object that will change the map fragment in activity_main.xml

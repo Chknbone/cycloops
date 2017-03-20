@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="fragment_layout" type="id">fragment_layout</item>
+    <item name="google_map" type="id">google_map</item>
+</resources>
