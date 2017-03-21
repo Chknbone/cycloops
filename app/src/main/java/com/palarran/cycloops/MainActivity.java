@@ -15,7 +15,6 @@
  */
 package com.palarran.cycloops;
 
-import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.app.LoaderManager;
 import android.content.Context;
@@ -35,6 +34,8 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.google.android.gms.maps.MapFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +62,17 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
      //TextView ths is displayed when there is no available internet/network connection
     private TextView mNoNetworkTextView;
+
+    private MapFragment cycloneMapFrag;
+
+    private void initMapFragment() {
+
+       FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        cycloneMapFrag = new MapFragment();
+        MapFragment supportMapFragment = cycloneMapFrag;
+        fragmentTransaction.add(R.id.google_map, supportMapFragment);
+        fragmentTransaction.commit();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -111,12 +123,14 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // because this activity implements the LoaderCallbacks interface).
         loaderManager.initLoader(CYCLONE_LOADER_ID, null, this);
 
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        FragmentManager fragmentManager = getFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        CycloneMap mapFrag = new CycloneMap();
-        fragmentTransaction.add(R.id.google_map, mapFrag);
-        fragmentTransaction.commit();
+//        CycloneMap mapFrag = new CycloneMap();
+//        FragmentTransaction.add(google_map, mapFrag);
+//        fragmentTransaction.commit();
+
+        initMapFragment();
     }
 
     @Override
