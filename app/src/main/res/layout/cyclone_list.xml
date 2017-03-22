@@ -18,11 +18,13 @@
             android:layout_weight="1"/>
 
         <!-- Layout for Google Maps Fragment -->
-        <FrameLayout
+        <fragment
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/google_map"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:name="com.google.android.gms.maps.MapFragment"/>
     </LinearLayout>
 
     <!-- Empty view is only visible when the list has no items -->

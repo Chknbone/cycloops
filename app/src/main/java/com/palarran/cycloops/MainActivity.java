@@ -15,7 +15,6 @@
  */
 package com.palarran.cycloops;
 
-import android.app.FragmentTransaction;
 import android.app.LoaderManager;
 import android.content.Context;
 import android.content.Intent;
@@ -35,12 +34,20 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.CameraPosition;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<CycloneData>> {
+//import static com.palarran.cycloops.CycloneMap.START_POINT;
+
+public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<CycloneData>>
+                                                                , OnMapReadyCallback {
 
     public static final String LOG_TAG = MainActivity.class.getName();
 
@@ -63,16 +70,16 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
      //TextView ths is displayed when there is no available internet/network connection
     private TextView mNoNetworkTextView;
 
-    private MapFragment cycloneMapFrag;
+    //Defining Google Map objects variables
+    GoogleMap mMap;
+    boolean mapReady=false;
 
-    private void initMapFragment() {
-
-       FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        cycloneMapFrag = new MapFragment();
-        MapFragment supportMapFragment = cycloneMapFrag;
-        fragmentTransaction.add(R.id.google_map, supportMapFragment);
-        fragmentTransaction.commit();
-    }
+    static final CameraPosition START_POINT = CameraPosition.builder()
+            .target(new LatLng(38.1254, -101.1703))
+            .zoom(3)
+            .bearing(359)
+            .tilt(5)
+            .build();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,14 +130,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // because this activity implements the LoaderCallbacks interface).
         loaderManager.initLoader(CYCLONE_LOADER_ID, null, this);
 
-//        FragmentManager fragmentManager = getFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        //Calling up the map fragment from cyclone_list.xml
+        MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.google_map);
+        mapFragment.getMapAsync(this);
 
-//        CycloneMap mapFrag = new CycloneMap();
-//        FragmentTransaction.add(google_map, mapFrag);
-//        fragmentTransaction.commit();
-
-        initMapFragment();
     }
 
     @Override
@@ -209,5 +212,22 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onMapReady(GoogleMap gMap) {
+        //Setting mapReady to true
+        mapReady=true;
+
+        //Loading local instance map from Callback
+        mMap = gMap;
+
+        //Set camera at starting point, high over the middle of the U.S of A.
+        startUpCameraPositon(START_POINT);
+    }
+
+    private void startUpCameraPositon(CameraPosition target) {
+        //Setting position to the target created above
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(target));
     }
 }
