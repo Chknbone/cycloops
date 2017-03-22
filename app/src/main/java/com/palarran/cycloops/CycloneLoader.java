@@ -44,7 +44,7 @@ public class CycloneLoader extends AsyncTaskLoader<List<CycloneData>> {
     }
 
         // Perform the network request, parse the response, and extract a list of Cyclones.
-        List<CycloneData> cyclones = Utils.fetchCycloneData(mUrl);
+        List<CycloneData> cyclones = JsonData.fetchCycloneData(mUrl);
         return cyclones;
     }
 }
