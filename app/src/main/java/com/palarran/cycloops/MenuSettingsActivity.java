@@ -35,7 +35,6 @@ public class MenuSettingsActivity extends AppCompatActivity {
             Preference orderBy = findPreference(getString(R.string.settings_order_by_key));
             bindPreferenceSummaryToValue(orderBy);
 
-
             Preference display_type = findPreference(getString(settings_cyclone_data_key));
             bindPreferenceSummaryToValue(display_type);
         }
@@ -53,7 +52,7 @@ public class MenuSettingsActivity extends AppCompatActivity {
                 @Override
                 public boolean onPreferenceChange(Preference preference, Object newValue) {
                     int val = Integer.parseInt(newValue.toString());
-                    if ((val > minCategory) && (val < maxCategory)) {
+                    if ((val >= minCategory) && (val <= maxCategory)) {
                         preference.setSummary("" + val);
                         return true;
                     }

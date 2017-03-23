@@ -20,16 +20,16 @@ import java.util.List;
 /**
  * Helper methods related to requesting and receiving Cyclone data from USGS.
  */
-public final class Utils {
+public final class JsonData {
 
-    private static final String LOG_TAG = Utils.class.getSimpleName();
+    private static final String LOG_TAG = JsonData.class.getSimpleName();
 
     /**
-     * Create a private constructor because no one should ever create a {@link Utils} object.
+     * Create a private constructor because no one should ever create a {@link JsonData} object.
      * This class is only meant to hold static variables and methods, which can be accessed
-     * directly from the class name Utils (and an object instance of Utils is not needed).
+     * directly from the class name JsonData (and an object instance of JsonData is not needed).
      */
-    private Utils() {
+    private JsonData() {
     }
 
     /**
@@ -90,7 +90,7 @@ public final class Utils {
             // If an error is thrown when executing any of the above statements in the "try" block,
             // catch the exception here, so the app doesn't crash. Print a log message
             // with the message from the exception.
-            Log.e("Utils", "Problem parsing the cyclone JSON results", e);
+            Log.e("JsonData", "Problem parsing the cyclone JSON results", e);
         }
 
         // Return the list of cyclones
