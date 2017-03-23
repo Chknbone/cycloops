@@ -2,11 +2,15 @@ package com.palarran.cycloops;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.Toast;
+
+import static com.palarran.cycloops.R.string.settings_cyclone_data_key;
 
 public class MenuSettingsActivity extends AppCompatActivity {
 
@@ -30,12 +34,37 @@ public class MenuSettingsActivity extends AppCompatActivity {
 
             Preference orderBy = findPreference(getString(R.string.settings_order_by_key));
             bindPreferenceSummaryToValue(orderBy);
+
+            Preference display_type = findPreference(getString(settings_cyclone_data_key));
+            bindPreferenceSummaryToValue(display_type);
         }
+
 
         //Show preference settings and updates immediately after setting is changed by user
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
             String stringValue = value.toString();
+            final int minCategory = -2;
+            final int maxCategory = 5;
+
+            final EditTextPreference editTextPreference=(EditTextPreference) findPreference(getString(R.string.settings_min_category_key));
+            editTextPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(Preference preference, Object newValue) {
+                    int val = Integer.parseInt(newValue.toString());
+                    if ((val >= minCategory) && (val <= maxCategory)) {
+                        preference.setSummary("" + val);
+                        return true;
+                    }
+                    else {
+                        // invalid you can show invalid message
+                        Toast.makeText(getActivity(), "No such storm category", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getActivity(), "Enter a number between -2 and 5", Toast.LENGTH_LONG).show();
+                        return false;
+                    }
+                }
+            });
+
             if (preference instanceof ListPreference) {
                 ListPreference listPreference = (ListPreference) preference;
                 int prefIndex = listPreference.findIndexOfValue(stringValue);
@@ -47,6 +76,8 @@ public class MenuSettingsActivity extends AppCompatActivity {
                 preference.setSummary(stringValue);
             }
             return true;
+
+
         }
 
         //Define the bindPreferenceSummaryToValue() helper method to set the current
@@ -58,4 +89,6 @@ public class MenuSettingsActivity extends AppCompatActivity {
             onPreferenceChange(preference, preferenceString);
         }
     }
+
+
 }

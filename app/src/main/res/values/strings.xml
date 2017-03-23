@@ -16,15 +16,20 @@
     <!-- Settings Activity Title [CHAR LIMIT=NONE] -->
     <string name="settings_title">Cyclone Settings</string>
 
+    <!-- Strings For Order-By Preference [CHAR LIMIT=30] -->
+    <string name="settings_order_by_label">Order By</string>
+    <string name="settings_order_by_key" translatable="false">order_by</string>
+    <string name="settings_order_by_default" translatable="false">@string/settings_order_by_category_value</string>
+
     <!-- Strings For Minimum Category Preference [CHAR LIMIT=30] -->
     <string name="settings_min_category_label">Minimum Category</string>
     <string name="settings_min_category_key" translatable="false">min_category</string>
     <string name="settings_min_category_default" translatable="false">-2</string>
 
-    <!-- Strings For Order-By Preference [CHAR LIMIT=30] -->
-    <string name="settings_order_by_label">Order By</string>
-    <string name="settings_order_by_key" translatable="false">order_by</string>
-    <string name="settings_order_by_default" translatable="false">@string/settings_order_by_category_value</string>
+    <!-- Strings For Cyclone data type to display Preference [CHAR LIMIT=30] -->
+    <string name="settings_cyclone_data_label">Cyclone data to display</string>
+    <string name="settings_cyclone_data_key" translatable="false">display_type</string>
+    <string name="settings_cyclone_data_default" translatable="false">@string/settings_live_data_value</string>
 
     <!-- Label for order-by category option [CHAR LIMIT=20] -->
     <string name="settings_order_by_category_label">Category</string>
@@ -33,4 +38,16 @@
     <!-- Label for order-by most recent option [CHAR LIMIT=20] -->
     <string name="settings_order_by_most_recent_label">Most Recent</string>
     <string name="settings_order_by_most_recent_value" translatable="false">time</string>
+
+    <!--Fixme: get these values to show up in menu item -->
+    <!-- Label for live Cyclone data [CHAR LIMIT=20] -->
+    <string name="settings_live_data_label">Live cyclone data</string>
+    <string name="settings_live_data_value" translatable="false">Live</string>
+
+    <!-- Label for example Cyclone data [CHAR LIMIT=20] -->
+    <string name="settings_example_data_label">Example cyclone data</string>
+    <string name="settings_example_data_value" translatable="false">Example</string>
+
+    <string name="storm_category_range">Range: -2 - 5</string>
+
 </resources>

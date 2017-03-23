@@ -8,13 +8,23 @@
         android:entries="@array/settings_order_by_labels"
         android:entryValues="@array/settings_order_by_values"
         android:key="@string/settings_order_by_key"
-        android:title="@string/settings_order_by_label" />
+        android:title="@string/settings_order_by_label"/>
 
     <EditTextPreference
+        android:id="@+id/cyclone_range_filter"
         android:defaultValue="@string/settings_min_category_default"
-        android:inputType="numberDecimal"
+        android:inputType="numberDecimal|numberSigned"
+        android:hint="@string/storm_category_range"
         android:key="@string/settings_min_category_key"
         android:selectAllOnFocus="true"
-        android:title="@string/settings_min_category_label" />
+        android:title="@string/settings_min_category_label"/>
+
+    <ListPreference
+        android:defaultValue="@string/settings_cyclone_data_default"
+        android:entries="@array/settings_data_displayed_labels"
+        android:entryValues="@array/settings_data_displayed_values"
+        android:key="@string/settings_cyclone_data_key"
+        android:title="@string/settings_cyclone_data_label"
+        />
 
 </PreferenceScreen>
