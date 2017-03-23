@@ -30,6 +30,9 @@ public class MenuSettingsActivity extends AppCompatActivity {
 
             Preference orderBy = findPreference(getString(R.string.settings_order_by_key));
             bindPreferenceSummaryToValue(orderBy);
+
+            Preference display_type = findPreference(getString(R.string.settings_cyclone_data_key));
+            bindPreferenceSummaryToValue(display_type);
         }
 
         //Show preference settings and updates immediately after setting is changed by user
