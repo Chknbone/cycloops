@@ -14,10 +14,10 @@ import java.util.ArrayList;
 
 /**
  * {@link CycloneAdapter} is an {@link ArrayAdapter} that provides the layout for each list
- * based on a data source, which is a list of {@link CycloneData} objects.
+ * based on a data source, which is a list of {@link Cyclone} objects.
  */
 
-public class CycloneAdapter extends ArrayAdapter<CycloneData> {
+public class CycloneAdapter extends ArrayAdapter<Cyclone> {
 
     private static final String LOG_TAG = CycloneAdapter.class.getSimpleName();
 
@@ -29,7 +29,7 @@ public class CycloneAdapter extends ArrayAdapter<CycloneData> {
      * @param context  The current context. Used to inflate the layout file.
      * @param cyclones A List of Cyclone Data objects to display in a list
      */
-    public CycloneAdapter(Activity context, ArrayList<CycloneData> cyclones) {
+    public CycloneAdapter(Activity context, ArrayList<Cyclone> cyclones) {
         // Initialize the ArrayAdapter's internal storage for the context and the list.
         // The second argument is used when the ArrayAdapter is populating a single TextView.
         // Because this is a custom adapter for four TextViews, the adapter is not going to use
@@ -110,24 +110,24 @@ public class CycloneAdapter extends ArrayAdapter<CycloneData> {
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.activity_main, parent, false);
         }
 
-        //Get the {@link CycloneData} object located at this position in the list
-        CycloneData currentCycloneData = getItem(position);
+        //Get the {@link Cyclone} object located at this position in the list
+        Cyclone currentCyclone = getItem(position);
 
         //Find the TextView in the activity_main.xml layout with ID storm_category
         TextView categoryTextView = (TextView) listItemView.findViewById(R.id.storm_category);
         // Get the category & set that text on the categoryTextView
-        int categoryOutput = currentCycloneData.getCategory();
+        int categoryOutput = currentCyclone.getCategory();
         //int needs to be converted to a String before setText can happen properly
         categoryTextView.setText(Integer.toString(categoryOutput));
 
         //Get the Cyclone name data
-        String cycloneName = currentCycloneData.getmName();
+        String cycloneName = currentCyclone.getName();
         //Get the Cyclone name & set text on the relevant Textview
         TextView cycloneNameTextView = (TextView) listItemView.findViewById(R.id.storm_name);
         cycloneNameTextView.setText(cycloneName);
 
         //Get the Cyclone Heading and direction data from JSON
-        String JSONHeading = currentCycloneData.getmHeading();
+        String JSONHeading = currentCyclone.getHeading();
         //Run it through the Switch statement above
         String cardinalDirection = getCardinalDirection(JSONHeading);
         String cycloneHeading = cardinalDirection;
@@ -138,7 +138,7 @@ public class CycloneAdapter extends ArrayAdapter<CycloneData> {
         //Find the TextView in the activity_main.xml layout with ID storm_category
         TextView windSpeedTextView = (TextView) listItemView.findViewById(R.id.wind_speed);
         //Get the wind speed the Cyclone is producing & set that text on the windSpeedTextView
-        String windSpeedKnots = currentCycloneData.getmWindSpeedKnots();
+        String windSpeedKnots = currentCyclone.getWindSpeedKnots();
         windSpeedTextView.setText(windSpeedKnots);
 
         // Set the proper background color on the cyclone shaped icon.
@@ -146,7 +146,7 @@ public class CycloneAdapter extends ArrayAdapter<CycloneData> {
         GradientDrawable cycloneShape = (GradientDrawable) categoryTextView.getBackground();
 
         // Get the appropriate background color based on the current cyclone category
-        int categoryColor = getCategoryColor(currentCycloneData.getCategory());
+        int categoryColor = getCategoryColor(currentCyclone.getCategory());
 
         // Set the color on the cyclone shape icon
         cycloneShape.setColor(categoryColor);

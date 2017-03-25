@@ -33,13 +33,13 @@ public final class JsonData {
     }
 
     /**
-     * Return a list of {@link CycloneData} objects that has been built up from
+     * Return a list of {@link Cyclone} objects that has been built up from
      * parsing a JSON response.
      */
-    public static ArrayList<CycloneData> extractFeatureFromJson(String cycloneJSON) {
+    public static ArrayList<Cyclone> extractFeatureFromJson(String cycloneJSON) {
 
         // Create an empty ArrayList to start adding Cyclones to
-        ArrayList<CycloneData> cyclones = new ArrayList<>();
+        ArrayList<Cyclone> cyclones = new ArrayList<>();
 
         // Try to parse the cycloneJSON response string. If there's a problem with the way the JSON
         // is formatted, a JSONException exception object will be thrown.
@@ -54,7 +54,7 @@ public final class JsonData {
             JSONArray currentHurricaneArray = rootJsonObject.getJSONArray("currenthurricane");
 
             //Loop through each section in the currentHurricaneArray array & create an
-            //{@link CycloneData} object for each one
+            //{@link Cyclone} object for each one
             for (int i = 0; i < currentHurricaneArray.length(); i++) {
                 //Get cyclone JSONObject at position i in the array
                 JSONObject cycloneProperties = currentHurricaneArray.getJSONObject(i);
@@ -81,7 +81,7 @@ public final class JsonData {
                 //Extract movement direction in "Text" key
                 String direction = movement.optString("Text");
 
-                CycloneData cyclone = new CycloneData(category, name, direction, knots, url);
+                Cyclone cyclone = new Cyclone(category, name, direction, knots, url);
                 //Add new cyclone to list
                 cyclones.add(cyclone);
             }
@@ -169,9 +169,9 @@ public final class JsonData {
     }
 
     /**
-     * Query the USGS data set and return a list of {@link CycloneData} objects.
+     * Query the USGS data set and return a list of {@link Cyclone} objects.
      */
-    public static List<CycloneData> fetchCycloneData(String requestUrl) {
+    public static List<Cyclone> fetchCycloneData(String requestUrl) {
         // Create URL object
         URL url = createUrl(requestUrl);
 
@@ -183,10 +183,10 @@ public final class JsonData {
             Log.e(LOG_TAG, "Problem making the HTTP request.", e);
         }
 
-        // Extract relevant fields from the JSON response and create a list of {@link CycloneData}s
-        List<CycloneData> cyclones = extractFeatureFromJson(jsonResponse);
+        // Extract relevant fields from the JSON response and create a list of {@link Cyclone}s
+        List<Cyclone> cyclones = extractFeatureFromJson(jsonResponse);
 
-        // Return the list of {@link CycloneData}s
+        // Return the list of {@link Cyclone}s
         return cyclones;
     }
 }

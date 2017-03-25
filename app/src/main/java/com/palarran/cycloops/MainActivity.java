@@ -59,7 +59,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements
-        LoaderManager.LoaderCallbacks<List<CycloneData>>,
+        LoaderManager.LoaderCallbacks<List<Cyclone>>,
         OnMapReadyCallback,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements
     public static final String LOG_TAG = MainActivity.class.getName();
 
     //Adapter for the list of Cyclones
-    private CycloneAdapter mAdapter;
+    private CycloneAdapter adapter;
 
     //URL for JSON Cyclone data from the USGS website data set
     private static final String WUNDERGROUND_CURRENT_HURRICANE_URI
@@ -80,18 +80,18 @@ public class MainActivity extends AppCompatActivity implements
     private static final int CYCLONE_LOADER_ID = 1;
 
     //TextView that is displayed when the Cyclone list is empty
-    private TextView mEmptyStateTextView;
+    private TextView emptyStateTextView;
 
     //TextView ths is displayed when there is no available internet/network connection
-    private TextView mNoNetworkTextView;
+    private TextView noNetworkTextView;
 
     //Defining Google Map objects variables
-    GoogleMap mMap;
+    GoogleMap googleMap;
     boolean mapReady = false;
-    GoogleApiClient mGoogleApiClient;
-    Location mLastLocation;
-    Marker mCurrLocationMarker;
-    LocationRequest mLocationRequest;
+    GoogleApiClient googleApiClient;
+    Location lastLocation;
+    Marker currLocationMarker;
+    LocationRequest locationRequest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,10 +102,10 @@ public class MainActivity extends AppCompatActivity implements
         ListView cycloneListView = (ListView) findViewById(R.id.cyclone_list);
 
         // Create a new adapter that takes an empty list of Cyclones as input
-        mAdapter = new CycloneAdapter(this, new ArrayList<CycloneData>());
+        adapter = new CycloneAdapter(this, new ArrayList<Cyclone>());
 
         // Set the adapter on the {@link ListView} so the list can be populated in the UI
-        cycloneListView.setAdapter(mAdapter);
+        cycloneListView.setAdapter(adapter);
 
         // Set an item click listener on the ListView, which sends an intent to a web browser
         // to open a website with more information about the selected Cyclone.
@@ -113,10 +113,10 @@ public class MainActivity extends AppCompatActivity implements
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 // Find the current Cyclone that was clicked on
-                CycloneData currentCyclone = mAdapter.getItem(position);
+                Cyclone currentCyclone = adapter.getItem(position);
 
                 // Convert the String URL into a URI object (to pass into the Intent constructor)
-                Uri cycloneUri = Uri.parse(currentCyclone.getmUrl());
+                Uri cycloneUri = Uri.parse(currentCyclone.getUrl());
 
                 // Create a new intent to view the Cyclone URI
                 Intent websiteIntent = new Intent(Intent.ACTION_VIEW, cycloneUri);
@@ -127,12 +127,12 @@ public class MainActivity extends AppCompatActivity implements
         });
 
         //Setting up the correct view in the event there is no network connection
-        mNoNetworkTextView = (TextView) findViewById(R.id.no_network);
-        cycloneListView.setEmptyView(mNoNetworkTextView);
+        noNetworkTextView = (TextView) findViewById(R.id.no_network);
+        cycloneListView.setEmptyView(noNetworkTextView);
 
         //Setting up the correct view in the event there is no Cyclones to list
-        mEmptyStateTextView = (TextView) findViewById(R.id.empty_cyclone_list);
-        cycloneListView.setEmptyView(mEmptyStateTextView);
+        emptyStateTextView = (TextView) findViewById(R.id.empty_cyclone_list);
+        cycloneListView.setEmptyView(emptyStateTextView);
 
         // Get a reference to the LoaderManager, in order to interact with loaders.
         LoaderManager loaderManager = getLoaderManager();
@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public Loader<List<CycloneData>> onCreateLoader(int i, Bundle bundle) {
+    public Loader<List<Cyclone>> onCreateLoader(int i, Bundle bundle) {
 
         // Create a new loader for the given URI
         SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(this);
@@ -176,19 +176,19 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onLoadFinished(Loader<List<CycloneData>> loader, List<CycloneData> cyclones) {
+    public void onLoadFinished(Loader<List<Cyclone>> loader, List<Cyclone> cyclones) {
 
         //No connectivity
-        ConnectivityManager cm = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connectivityManager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
 
-        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
         boolean isConnected = activeNetwork != null &&
                 activeNetwork.isConnectedOrConnecting();
         if (!isConnected) {
-            mNoNetworkTextView.setText(R.string.no_network);
+            noNetworkTextView.setText(R.string.no_network);
         } else {
             // Set empty state text to display "No cyclones found."
-            mEmptyStateTextView.setText(R.string.no_cyclones_found);
+            emptyStateTextView.setText(R.string.no_cyclones_found);
         }
 
         //Stop displaying Progressbar
@@ -196,19 +196,19 @@ public class MainActivity extends AppCompatActivity implements
         progressBar.setVisibility(View.GONE);
 
         // Clear the adapter of previous cyclone data
-        mAdapter.clear();
+        adapter.clear();
 
-        // If there is a valid list of {@link CycloneData}s, then add them to the adapter's
+        // If there is a valid list of {@link Cyclone}s, then add them to the adapter's
         // data set. This will trigger the ListView to update.
         if (cyclones != null && !cyclones.isEmpty()) {
-            mAdapter.addAll(cyclones);
+            adapter.addAll(cyclones);
         }
     }
 
     @Override
-    public void onLoaderReset(Loader<List<CycloneData>> loader) {
+    public void onLoaderReset(Loader<List<Cyclone>> loader) {
         // Loader reset, so we can clear out our existing data.
-        mAdapter.clear();
+        adapter.clear();
     }
 
     //Menu for user preference settings
@@ -239,13 +239,13 @@ public class MainActivity extends AppCompatActivity implements
      * installed Google Play services and returned to the app.
      */
     @Override
-    public void onMapReady(GoogleMap gMap) {
+    public void onMapReady(GoogleMap mapLocalInstance) {
         //Setting mapReady to true
         mapReady = true;
 
         //Loading local instance map from Callback
-        mMap = gMap;
-        mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+        googleMap = mapLocalInstance;
+        googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 
         //checks for permission using the Support library before enabling the My Location layer
         //Initialize Google Play Services
@@ -254,11 +254,11 @@ public class MainActivity extends AppCompatActivity implements
                     Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {
                 buildGoogleApiClient();
-                mMap.setMyLocationEnabled(true);
+                googleMap.setMyLocationEnabled(true);
             }
         } else {
             buildGoogleApiClient();
-            mMap.setMyLocationEnabled(true);
+            googleMap.setMyLocationEnabled(true);
         }
     }
 
@@ -267,15 +267,15 @@ public class MainActivity extends AppCompatActivity implements
      * .addConnectionCallbacks provides callbacks that are called when client is connected or disconnected.
      * .addOnConnectionFailedListener handles failed connection attempts to service.
      * .addApi adds the LocationServices API endpoint from Google Play Services.
-     * mGoogleApiClient.connect(): A client must be connected before executing any operation.
+     * googleApiClient.connect(): A client must be connected before executing any operation.
      */
     protected synchronized void buildGoogleApiClient() {
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
+        googleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
-        mGoogleApiClient.connect();
+        googleApiClient.connect();
     }
 
     /**
@@ -293,14 +293,14 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public void onConnected(Bundle bundle) {
 
-        mLocationRequest = new LocationRequest();
-        mLocationRequest.setInterval(1000);
-        mLocationRequest.setFastestInterval(1000);
-        mLocationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
+        locationRequest = new LocationRequest();
+        locationRequest.setInterval(1000);
+        locationRequest.setFastestInterval(1000);
+        locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
-            LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+            LocationServices.FusedLocationApi.requestLocationUpdates(googleApiClient, locationRequest, this);
         }
 
     }
@@ -318,9 +318,9 @@ public class MainActivity extends AppCompatActivity implements
      */
     @Override
     public void onLocationChanged(Location location) {
-        mLastLocation = location;
-        if (mCurrLocationMarker != null) {
-            mCurrLocationMarker.remove();
+        lastLocation = location;
+        if (currLocationMarker != null) {
+            currLocationMarker.remove();
         }
 
         //Place current location marker
@@ -329,15 +329,15 @@ public class MainActivity extends AppCompatActivity implements
         markerOptions.position(latLng);
         markerOptions.title("Current Position");
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
-        mCurrLocationMarker = mMap.addMarker(markerOptions);
+        currLocationMarker = googleMap.addMarker(markerOptions);
 
         //move map camera
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(11));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        googleMap.animateCamera(CameraUpdateFactory.zoomTo(11));
 
         //stop location updates
-        if (mGoogleApiClient != null) {
-            LocationServices.FusedLocationApi.removeLocationUpdates(mGoogleApiClient, this);
+        if (googleApiClient != null) {
+            LocationServices.FusedLocationApi.removeLocationUpdates(googleApiClient, this);
         }
     }
 
@@ -395,10 +395,10 @@ public class MainActivity extends AppCompatActivity implements
                             Manifest.permission.ACCESS_FINE_LOCATION)
                             == PackageManager.PERMISSION_GRANTED) {
 
-                        if (mGoogleApiClient == null) {
+                        if (googleApiClient == null) {
                             buildGoogleApiClient();
                         }
-                        mMap.setMyLocationEnabled(true);
+                        googleMap.setMyLocationEnabled(true);
                     }
 
                 } else {

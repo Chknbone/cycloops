@@ -48,6 +48,7 @@
     <string name="settings_example_data_label">Example cyclone data</string>
     <string name="settings_example_data_value" translatable="false">Example</string>
 
+    <!-- Hint for EditTextPreference -->
     <string name="storm_category_range">Range: -2 - 5</string>
 
 </resources>

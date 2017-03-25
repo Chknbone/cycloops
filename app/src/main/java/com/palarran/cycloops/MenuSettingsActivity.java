@@ -39,7 +39,6 @@ public class MenuSettingsActivity extends AppCompatActivity {
             bindPreferenceSummaryToValue(display_type);
         }
 
-
         //Show preference settings and updates immediately after setting is changed by user
         @Override
         public boolean onPreferenceChange(Preference preference, Object value) {
@@ -89,6 +88,4 @@ public class MenuSettingsActivity extends AppCompatActivity {
             onPreferenceChange(preference, preferenceString);
         }
     }
-
-
 }
