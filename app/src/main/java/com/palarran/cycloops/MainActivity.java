@@ -74,7 +74,6 @@ public class MainActivity extends AppCompatActivity implements
     private static final String WUNDERGROUND_CURRENT_HURRICANE_URI
             = "http://api.wunderground.com/api/95e20de6002dc6f0/currenthurricane/view.json";
 
-
     //Constant value for the Cyclone loader ID. Can be any integer.
     //This really only comes into play if using multiple loaders. Setting to 1
     private static final int CYCLONE_LOADER_ID = 1;
@@ -92,6 +91,18 @@ public class MainActivity extends AppCompatActivity implements
     Location lastLocation;
     Marker currLocationMarker;
     LocationRequest locationRequest;
+
+    //Object for the current position of the current cyclone
+    Cyclone currentCyclonePosition;
+    Cyclone currentCycloneName;
+
+    //Fixme: Debug is showing NUllPointerException here. Most likely JSON data is not getting pulled correctly
+    //Defining map markers for Cyclone location (Lat & Lon)
+    double cycloneLatitude = currentCyclonePosition.getLatitude();
+    double cycloneLongitude = currentCyclonePosition.getLongitude();
+    String cycloneName = currentCycloneName.getName();
+
+    MarkerOptions cyclonePosition;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -149,6 +160,11 @@ public class MainActivity extends AppCompatActivity implements
         //Calling up the map fragment from cyclone_list.xml
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.google_map);
         mapFragment.getMapAsync(this);
+
+        //Setting up map markers for Cyclone Position with custom icons
+        cyclonePosition = new MarkerOptions().position(new LatLng(cycloneLatitude, cycloneLongitude))
+                .title(cycloneName)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.cyclone_shape));
     }
 
     @Override
@@ -247,6 +263,9 @@ public class MainActivity extends AppCompatActivity implements
         googleMap = mapLocalInstance;
         googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 
+        //Placing cyclone map marker (cycloneName) on Map
+        mapLocalInstance.addMarker(cyclonePosition);
+
         //checks for permission using the Support library before enabling the My Location layer
         //Initialize Google Play Services
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -324,15 +343,15 @@ public class MainActivity extends AppCompatActivity implements
         }
 
         //Place current location marker
-        LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
+        LatLng userLatLon = new LatLng(location.getLatitude(), location.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(latLng);
+        markerOptions.position(userLatLon);
         markerOptions.title("Current Position");
         markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA));
         currLocationMarker = googleMap.addMarker(markerOptions);
 
         //move map camera
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(userLatLon));
         googleMap.animateCamera(CameraUpdateFactory.zoomTo(11));
 
         //stop location updates
