@@ -70,21 +70,9 @@ public final class JsonData {
                 // Extract "SaffirSimpsonCategory" key
                 int category = current.optInt("SaffirSimpsonCategory");
 
-                //Fixme: Not sure if this is pulling correct data
                 //Extract "Lat" & "Lon" keys to get cyclone position
                 float latitude = (float) current.optDouble("lat");
                 float longitude = (float) current.optDouble("lon");
-
-                //BigDecimal requires build version 24 or newer. Adding if statement to cover handle
-                //if users phone is running and older version.
-//                float latitude = 0;
-//                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-//                    latitude = BigDecimal.valueOf(current.getDouble("Lat")).floatValue();
-//                }
-//                float longitude = 0;
-//                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
-//                    longitude = BigDecimal.valueOf(current.getDouble("KEY_STRING")).floatValue();
-//                }
 
                 //Extract "WindSpeed" object
                 JSONObject windSpeed = current.optJSONObject("WindSpeed");

@@ -151,7 +151,6 @@ public class CycloneAdapter extends ArrayAdapter<Cyclone> {
         String strLat = String.valueOf(cycloneLatitude);
         String strLon = String.valueOf(cycloneLongitude);
         String cycloneLatLon = strLat + " " + strLon;
-        //strLat.concat(strLon);
 
         //Find the TextView in the activity_main.xml layout with ID latlon
         TextView LatLonTextView = (TextView) listItemView.findViewById(R.id.lat_lon);

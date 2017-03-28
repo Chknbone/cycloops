@@ -2,7 +2,7 @@ package com.palarran.cycloops;
 
 /**
  * {@link Cyclone} class represents a single Cyclone object.
- * Each object has 4 properties: Category, Name, Heading, WindSpeed, and Url.
+ * Each object has 7 properties: Category, Latitude, Longitude, Name, Heading, WindSpeed, and Url.
  */
 
 public class Cyclone {
@@ -77,7 +77,7 @@ public class Cyclone {
         return heading;
     }
 
-    // Get the cyclones windspeed
+    // Get the cyclones wind speed
     public String getWindSpeedKnots() {
         return windSpeedKnots;
     }
