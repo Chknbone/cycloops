@@ -11,7 +11,7 @@ public class Cyclone {
     private int category;
 
     // Latitude & Longitude of Cyclone
-    private double latitude, longitude;
+    private float latitude, longitude;
 
     // Cyclone name
     private String name;
@@ -37,7 +37,7 @@ public class Cyclone {
     * @param constWindSpeedKnots is the speed of the wind the Cyclone is producing
     * @param constUrl is the url of the website that is providing the data
     */
-    public Cyclone(int constCategory, double constLatitude, double constLongitude,String constName,
+    public Cyclone(int constCategory, float constLatitude, float constLongitude,String constName,
                    String constHeading, String constWindSpeedKnots, String constUrl) {
 
         category = constCategory;
@@ -58,12 +58,12 @@ public class Cyclone {
     }
 
     // Get the cyclones Latitude
-    public double getLatitude() {
+    public float getLatitude() {
         return latitude;
     }
 
     //Get the cyclones Longitude
-    public double getLongitude() {
+    public float getLongitude() {
         return longitude;
     }
 

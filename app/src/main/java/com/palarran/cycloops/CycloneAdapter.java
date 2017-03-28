@@ -85,8 +85,11 @@ public class CycloneAdapter extends ArrayAdapter<Cyclone> {
             case 4:
                 categoryColorResourceId = R.color.category4;
                 break;
-            default:
+            case 5:
                 categoryColorResourceId = R.color.category5;
+                break;
+            default:
+                categoryColorResourceId = R.color.category_weak_storm;
                 break;
         }
         return ContextCompat.getColor(getContext(), categoryColorResourceId);
@@ -135,11 +138,24 @@ public class CycloneAdapter extends ArrayAdapter<Cyclone> {
         TextView cycloneHeadingTextView = (TextView) listItemView.findViewById(R.id.direction);
         cycloneHeadingTextView.setText(cycloneHeading);
 
-        //Find the TextView in the activity_main.xml layout with ID storm_category
-        TextView windSpeedTextView = (TextView) listItemView.findViewById(R.id.wind_speed);
         //Get the wind speed the Cyclone is producing & set that text on the windSpeedTextView
         String windSpeedKnots = currentCyclone.getWindSpeedKnots();
+        //Find the TextView in the activity_main.xml layout with ID storm_category
+        TextView windSpeedTextView = (TextView) listItemView.findViewById(R.id.wind_speed);
         windSpeedTextView.setText(windSpeedKnots);
+
+        //Get the current latitude & longitude of the active cyclone
+        float cycloneLatitude = currentCyclone.getLatitude();
+        float cycloneLongitude = currentCyclone.getLongitude();
+        //Convert float values to Stings and concatenate to one value
+        String strLat = String.valueOf(cycloneLatitude);
+        String strLon = String.valueOf(cycloneLongitude);
+        String cycloneLatLon = strLat + " " + strLon;
+        //strLat.concat(strLon);
+
+        //Find the TextView in the activity_main.xml layout with ID latlon
+        TextView LatLonTextView = (TextView) listItemView.findViewById(R.id.lat_lon);
+        LatLonTextView.setText(cycloneLatLon);
 
         // Set the proper background color on the cyclone shaped icon.
         // Fetch the background from the TextView, which is a GradientDrawable.

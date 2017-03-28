@@ -92,15 +92,15 @@ public class MainActivity extends AppCompatActivity implements
     Marker currLocationMarker;
     LocationRequest locationRequest;
 
-    //Object for the current position of the current cyclone
-    Cyclone currentCyclonePosition;
-    Cyclone currentCycloneName;
-
-    //Fixme: Debug is showing NUllPointerException here. Most likely JSON data is not getting pulled correctly
-    //Defining map markers for Cyclone location (Lat & Lon)
-    double cycloneLatitude = currentCyclonePosition.getLatitude();
-    double cycloneLongitude = currentCyclonePosition.getLongitude();
-    String cycloneName = currentCycloneName.getName();
+//    //Object for the current position of the current cyclone
+//    Cyclone currentCyclonePosition;
+//    Cyclone currentCycloneName;
+//
+//    //Fixme: Debug is showing NUllPointerException here. Most likely JSON data is not getting pulled correctly
+//    //Defining map markers for Cyclone location (Lat & Lon)
+//    float cycloneLatitude = currentCyclonePosition.getLatitude();
+//    float cycloneLongitude = currentCyclonePosition.getLongitude();
+//    String cycloneName = currentCycloneName.getName();
 
     MarkerOptions cyclonePosition;
 
@@ -161,10 +161,10 @@ public class MainActivity extends AppCompatActivity implements
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.google_map);
         mapFragment.getMapAsync(this);
 
-        //Setting up map markers for Cyclone Position with custom icons
-        cyclonePosition = new MarkerOptions().position(new LatLng(cycloneLatitude, cycloneLongitude))
-                .title(cycloneName)
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.cyclone_shape));
+//        //Setting up map markers for Cyclone Position with custom icons
+//        cyclonePosition = new MarkerOptions().position(new LatLng(cycloneLatitude, cycloneLongitude))
+//                .title(cycloneName)
+//                .icon(BitmapDescriptorFactory.fromResource(R.drawable.cyclone_shape));
     }
 
     @Override
@@ -263,8 +263,8 @@ public class MainActivity extends AppCompatActivity implements
         googleMap = mapLocalInstance;
         googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
 
-        //Placing cyclone map marker (cycloneName) on Map
-        mapLocalInstance.addMarker(cyclonePosition);
+//        //Placing cyclone map marker (cycloneName) on Map
+//        mapLocalInstance.addMarker(cyclonePosition);
 
         //checks for permission using the Support library before enabling the My Location layer
         //Initialize Google Play Services

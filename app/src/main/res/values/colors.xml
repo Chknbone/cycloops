@@ -15,6 +15,9 @@
     <!-- Text color for the primary location of the cyclone in the list item -->
     <color name="textColorCycloneHeading">#2B3D4D</color>
 
+    <!-- Cyclone shape color for a cyclone that is weaker than a Cat -2 -->
+    <color name="category_weak_storm">#8a8e8f</color>
+
     <!-- Cyclone shape color for a category -2 cyclone -->
     <color name="category_neg2">#03A9F4</color>
 

@@ -50,6 +50,18 @@
                 android:textColor="@color/textColorCycloneHeading"
                 android:textSize="16sp"
                 tools:text="Heading 270 degrees W"/>
+
+            <TextView
+                android:id="@+id/lat_lon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-medium"
+                android:maxLines="1"
+                android:textAllCaps="true"
+                android:textColor="@color/textColorCycloneName"
+                android:textSize="16sp"
+                tools:text="33.4544 -21.4322"/>
         </LinearLayout>
 
         <LinearLayout
