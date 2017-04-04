@@ -53,8 +53,11 @@ public final class JsonData {
             // a list of cyclones from JSON response.
             JSONArray currentHurricaneArray = rootJsonObject.getJSONArray("currenthurricane");
 
-            //Loop through each section in the currentHurricaneArray array & create an
-            //{@link Cyclone} object for each one
+            /**
+             * Loop through each section in the currentHurricaneArray array & create an
+             * {@link Cyclone} object for each one
+             *
+             */
             for (int i = 0; i < currentHurricaneArray.length(); i++) {
                 //Get cyclone JSONObject at position i in the array
                 JSONObject cycloneProperties = currentHurricaneArray.getJSONObject(i);
@@ -100,9 +103,8 @@ public final class JsonData {
         // Return the list of cyclones
         return cyclones;
     }
-    /**
-     * Returns new URL object from the given string URL.
-     */
+
+     //Returns new URL object from the given string URL.
     private static URL createUrl(String stringUrl) {
         URL url = null;
         try {
@@ -113,9 +115,7 @@ public final class JsonData {
         return url;
     }
 
-    /**
-     * Make an HTTP request to the given URL and return a String as the response.
-     */
+    //Make an HTTP request to the given URL and return a String as the response.
     private static String makeHttpRequest(URL url) throws IOException {
         String jsonResponse = "";
 

@@ -261,8 +261,7 @@ public class MainActivity extends AppCompatActivity implements
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
+     * This is where we can add markers or lines, add listeners or move the camera.
      * If Google Play services is not installed on the device, the user will be prompted to install
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
@@ -339,7 +338,6 @@ public class MainActivity extends AppCompatActivity implements
 
     @Override
     public void onConnectionSuspended(int i) {
-
     }
 
     /**
@@ -373,10 +371,8 @@ public class MainActivity extends AppCompatActivity implements
         }
     }
 
-    /**
-     * App will not be granted any permission at installation. Instead, app will ask user for
-     * permission one-by-one at runtime
-     */
+    //App will not be granted any permission at installation. Instead, app will ask user for
+    //permission one-by-one at runtime
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
 
     public boolean checkLocationPermission() {

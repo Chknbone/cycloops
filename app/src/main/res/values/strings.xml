@@ -1,10 +1,8 @@
-<!-- -->
-
 <resources>
     <!-- Name of App -->
     <string name="app_name">Cycloops</string>
 
-    <!-- Text to display if there are no Cyclones -->
+    <!-- Text to display if there are no Cyclones found -->
     <string name="no_cyclones_found">No cyclones found</string>
 
     <!-- Text to display if there is no network connection found -->
@@ -39,7 +37,6 @@
     <string name="settings_order_by_most_recent_label">Most Recent</string>
     <string name="settings_order_by_most_recent_value" translatable="false">time</string>
 
-    <!--Fixme: get these values to show up in menu item -->
     <!-- Label for live Cyclone data [CHAR LIMIT=20] -->
     <string name="settings_live_data_label">Live cyclone data</string>
     <string name="settings_live_data_value" translatable="false">Live</string>
