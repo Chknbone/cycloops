@@ -26,7 +26,6 @@ import android.location.Location;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.app.ActivityCompat;
@@ -57,6 +56,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.os.Build.VERSION_CODES.M;
 
 public class MainActivity extends AppCompatActivity implements
         LoaderManager.LoaderCallbacks<List<Cyclone>>,
@@ -153,7 +154,7 @@ public class MainActivity extends AppCompatActivity implements
         // because this activity implements the LoaderCallbacks interface).
         loaderManager.initLoader(CYCLONE_LOADER_ID, null, this);
 
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (android.os.Build.VERSION.SDK_INT >= M) {
             checkLocationPermission();
         }
         // Obtain the SupportMapFragment and get notified when the map is ready
@@ -214,8 +215,10 @@ public class MainActivity extends AppCompatActivity implements
         // Clear the adapter of previous cyclone data
         adapter.clear();
 
-        // If there is a valid list of {@link Cyclone}s, then add them to the adapter's
-        // data set. This will trigger the ListView to update.
+        /**
+         *  If there is a valid list of {@link Cyclone}s, then add them to the adapter's
+         * data set. This will trigger the ListView to update.
+         */
         if (cyclones != null && !cyclones.isEmpty()) {
             adapter.addAll(cyclones);
         }
@@ -237,6 +240,16 @@ public class MainActivity extends AppCompatActivity implements
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+
+        //Refreshes map and cyclone list. Would probably be faster/cleaner to just
+        //refresh the cyclone list.
+        if(id == R.id.action_refresh){
+             Intent refreshIntent = new Intent(this, MainActivity.class);
+             startActivity(refreshIntent);
+            return true;
+        }
+
+        //Opens up "overflow" menu settings option
         if (id == R.id.action_settings) {
             Intent settingsIntent = new Intent(this, MenuSettingsActivity.class);
             startActivity(settingsIntent);
@@ -268,7 +281,7 @@ public class MainActivity extends AppCompatActivity implements
 
         //checks for permission using the Support library before enabling the My Location layer
         //Initialize Google Play Services
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (android.os.Build.VERSION.SDK_INT >= M) {
             if (ContextCompat.checkSelfPermission(this,
                     Manifest.permission.ACCESS_FINE_LOCATION)
                     == PackageManager.PERMISSION_GRANTED) {

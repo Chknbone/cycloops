@@ -51,4 +51,7 @@
     <!-- Hint for EditTextPreference -->
     <string name="storm_category_range">Range: -2 - 5</string>
 
+    <!-- Name for refresh button in Menu bar -->
+    <string name="refresh_button">Refresh</string>
+
 </resources>
