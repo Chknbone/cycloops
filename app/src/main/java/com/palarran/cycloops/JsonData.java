@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Helper methods related to requesting and receiving Cyclone data from USGS.
+ * Helper methods related to requesting and receiving Cyclone data from Wunderground.
  */
 public final class JsonData {
 
@@ -173,7 +173,7 @@ public final class JsonData {
     }
 
     /**
-     * Query the USGS data set and return a list of {@link Cyclone} objects.
+     * Query the Wonderground data set and return a list of {@link Cyclone} objects.
      */
     public static List<Cyclone> fetchCycloneData(String requestUrl) {
         // Create URL object
