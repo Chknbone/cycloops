@@ -192,7 +192,9 @@ public final class JsonData {
         */
         List<Cyclone> cyclones = extractFeatureFromJson(jsonResponse);
 
-        // Return the list of {@link Cyclone}s
+        /**
+         * Return the list of {@link Cyclone}s
+         */
         return cyclones;
     }
 }
