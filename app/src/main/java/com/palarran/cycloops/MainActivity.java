@@ -93,30 +93,22 @@ public class MainActivity extends AppCompatActivity implements
     Marker currLocationMarker;
     LocationRequest locationRequest;
 
-//    //Object for the current position of the current cyclone
-//    Cyclone currentCyclonePosition;
-//    Cyclone currentCycloneName;
-
-    //Fixme: Debug is showing NUllPointerException here. JSON is getting pulled into Cyclone Adapter just fine, but It is not getting pulled here. I'm sure i'm calling it incorrectly
-    //Defining map markers for Cyclone location (Lat & Lon)
-//    float cycloneLatitude = currentCyclonePosition.getLatitude();
-//    float cycloneLongitude = currentCyclonePosition.getLongitude();
-//    String cycloneName = currentCycloneName.getName();
-
-    MarkerOptions cyclonePosition;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.cyclone_list);
 
-        // Find a reference to the {@link ListView} in the basic_list layout
+        /**
+         * Find a reference to the {@link ListView} in the basic_list layout
+         */
         ListView cycloneListView = (ListView) findViewById(R.id.cyclone_list);
 
         // Create a new adapter that takes an empty list of Cyclones as input
         adapter = new CycloneAdapter(this, new ArrayList<Cyclone>());
 
-        // Set the adapter on the {@link ListView} so the list can be populated in the UI
+        /**
+         * Set the adapter on the {@link ListView} so the list can be populated in the UI
+         */
         cycloneListView.setAdapter(adapter);
 
         // Set an item click listener on the ListView, which sends an intent to a web browser
@@ -161,11 +153,6 @@ public class MainActivity extends AppCompatActivity implements
         //Calling up the map fragment from cyclone_list.xml
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.google_map);
         mapFragment.getMapAsync(this);
-
-//        //Setting up map markers for Cyclone Position with custom icons
-//        cyclonePosition = new MarkerOptions().position(new LatLng(cycloneLatitude, cycloneLongitude))
-//                .title(cycloneName)
-//                .icon(BitmapDescriptorFactory.fromResource(R.drawable.cyclone_shape));
     }
 
     @Override
@@ -274,9 +261,6 @@ public class MainActivity extends AppCompatActivity implements
         //Loading local instance map from Callback
         googleMap = mapLocalInstance;
         googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
-
-//        //Placing cyclone map marker (cycloneName) on Map
-//        mapLocalInstance.addMarker(cyclonePosition);
 
         //checks for permission using the Support library before enabling the My Location layer
         //Initialize Google Play Services

@@ -34,9 +34,7 @@ public class CycloneLoader extends AsyncTaskLoader<List<Cyclone>> {
         forceLoad();
     }
 
-    /**
-     * This is on a background thread.
-     */
+     //This is on a background thread
     @Override
     public List<Cyclone> loadInBackground() {
         if (url == null) {

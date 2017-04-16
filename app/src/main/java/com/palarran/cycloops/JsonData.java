@@ -187,7 +187,9 @@ public final class JsonData {
             Log.e(LOG_TAG, "Problem making the HTTP request.", e);
         }
 
-        // Extract relevant fields from the JSON response and create a list of {@link Cyclone}s
+        /**
+        * Extract relevant fields from the JSON response and create a list of {@link Cyclone}s
+        */
         List<Cyclone> cyclones = extractFeatureFromJson(jsonResponse);
 
         // Return the list of {@link Cyclone}s
