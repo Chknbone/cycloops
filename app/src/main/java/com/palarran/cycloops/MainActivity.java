@@ -93,6 +93,14 @@ public class MainActivity extends AppCompatActivity implements
     Marker currLocationMarker;
     LocationRequest locationRequest;
 
+    //Creating a Cyclone object, calling it from Cyclone.java
+    Cyclone trackedCyclone = null;
+
+    //getting the three bits of info I need/want (Name, lat, lon)
+    String name = trackedCyclone.getName();
+    float lat = trackedCyclone.getLatitude();
+    float lon = trackedCyclone.getLongitude();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,6 +157,7 @@ public class MainActivity extends AppCompatActivity implements
         if (android.os.Build.VERSION.SDK_INT >= M) {
             checkLocationPermission();
         }
+        
         // Obtain the SupportMapFragment and get notified when the map is ready
         //Calling up the map fragment from cyclone_list.xml
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.google_map);
@@ -257,6 +266,9 @@ public class MainActivity extends AppCompatActivity implements
     public void onMapReady(GoogleMap mapLocalInstance) {
         //Setting mapReady to true
         mapReady = true;
+
+        LatLng cycloneMarker = new LatLng(lat, lon);
+        googleMap.addMarker(new MarkerOptions().position(cycloneMarker).title(name));
 
         //Loading local instance map from Callback
         googleMap = mapLocalInstance;
