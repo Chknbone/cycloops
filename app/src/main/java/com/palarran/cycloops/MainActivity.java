@@ -93,13 +93,29 @@ public class MainActivity extends AppCompatActivity implements
     Marker currLocationMarker;
     LocationRequest locationRequest;
 
-    //Creating a Cyclone object, calling it from Cyclone.java
-    Cyclone trackedCyclone = null;
+    //variables to hold Lat/Lon values from JSON data
+    float lat;
+    float lon;
 
-    //getting the three bits of info I need/want (Name, lat, lon)
-    String name = trackedCyclone.getName();
-    float lat = trackedCyclone.getLatitude();
-    float lon = trackedCyclone.getLongitude();
+    //Create and Init cyclone object for Cyclone Name and Lat/Lon
+    Cyclone cycloneName = new Cyclone("");
+    Cyclone cycloneLatLon = new Cyclone(0.0f, 0.0f);
+
+    //Methods to check if null, if not get the three bits of info I need/want (Name, lat, lon)
+    public Cyclone nameCyclone() {
+        if(cycloneName.getName() != null) cycloneName.getName();
+        return cycloneName;
+    }
+
+    public Cyclone latlonCyclone() {
+        if(cycloneLatLon.getLatitude() != 0.0f || cycloneLatLon.getLongitude() != 0.0f) {
+            lat = cycloneLatLon.getLatitude();
+            lon = cycloneLatLon.getLongitude();
+            //return cycloneLatLon;
+        }
+        return cycloneLatLon;
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -157,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements
         if (android.os.Build.VERSION.SDK_INT >= M) {
             checkLocationPermission();
         }
-        
+
         // Obtain the SupportMapFragment and get notified when the map is ready
         //Calling up the map fragment from cyclone_list.xml
         MapFragment mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.google_map);
@@ -268,11 +284,16 @@ public class MainActivity extends AppCompatActivity implements
         mapReady = true;
 
         LatLng cycloneMarker = new LatLng(lat, lon);
-        googleMap.addMarker(new MarkerOptions().position(cycloneMarker).title(name));
+
 
         //Loading local instance map from Callback
         googleMap = mapLocalInstance;
         googleMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
+
+        googleMap.addMarker(new MarkerOptions()
+                .position(cycloneMarker)
+                .title(String.valueOf(nameCyclone()))
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
         //checks for permission using the Support library before enabling the My Location layer
         //Initialize Google Play Services

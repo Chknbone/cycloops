@@ -49,6 +49,15 @@ public class Cyclone {
         url = constUrl;
     }
 
+    public Cyclone(String constName) {
+        name = constName;
+    }
+
+    public Cyclone(float constLatitude, float constLongitude) {
+        latitude = constLatitude;
+        longitude = constLongitude;
+    }
+
     /**
      * Setting public getters for the private variables above for use of other classes
      */
